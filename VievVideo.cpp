@@ -1,64 +1,113 @@
-#include "opencv2/opencv.hpp"
+#include <stdio.h>
+#include <opencv2/opencv.hpp>
+#include <opencv2/imgproc/imgproc.hpp>
 #include <iostream>
+#include <fstream>
+#include "players.h"
 
 using namespace std;
 using namespace cv;
 
-cv::Scalar bluemin = cv::Scalar(102.5, 153, 102);
-cv::Scalar bluemax = cv::Scalar(125, 255, 255);
+Scalar bluemin = cv::Scalar(102, 103, 102);
+Scalar bluemax = cv::Scalar(125, 255, 255);
+Scalar purplemin = cv::Scalar(138, 94, 105);
+Scalar purplemax = cv::Scalar(175.95, 255, 255);
+
+vector <Point> blueCenter;
+vector <Point> purpleCenter;
+vector <Player> players;
+
+void locatePlayer(Mat img, Scalar low, Scalar high, Color color) {
+    Mat mask;
+    inRange(img, low, high, mask);
+    vector < vector < Point>> contours;
+    findContours(mask, contours, RETR_EXTERNAL, CHAIN_APPROX_SIMPLE);
+    //cv::drawContours(copy, contours, -1, cv::Scalar(0, 255, 0), 2);
+
+
+    // Position Tracking
+    for (size_t i = 0; i < contours.size();++i) {
+        Rect boundRect = boundingRect(contours[i]);
+            //store the blue color center for the enemy team
+            if (color == Color::Blue) {
+                int px = boundRect.x + boundRect.width / 2;
+                int py = boundRect.y + boundRect.width / 2;
+                Point currentPlayerCenter(px, py);
+                blueCenter.push_back(currentPlayerCenter);
+                //creates and opens a file that will be used for data
+                ofstream Positions("C:\\Users\\jbnlu\\Desktop\\positions.txt", ios::app);
+                Positions << "PlayerId, X:position, Y:position \nId:, x:" << px << ", y:" << py << endl;
+                Positions.close();
+            }
+            //store the purple color identifier center for id creation
+            if (color == Color::Purple) {
+                int idx = boundRect.x + boundRect.width / 2;
+                int idy = boundRect.y + boundRect.width / 2;
+                Point currentPlayerIdCenter(idx, idy);
+                purpleCenter.push_back(currentPlayerIdCenter);
+
+            }
+            players.emplace_back(color, boundRect, boundRect.x + boundRect.width / 2, boundRect.y + boundRect.height / 2);
+        }
+}
+//Drawing the bounding boxes for every player for visual clarifaction
+//Note that this will later be repurposed for trail creation
+void drawPlayer(Mat img) {
+    for (size_t i = 0; i < players.size(); i++) {
+       switch (players[i].color) {
+       case Blue: rectangle(img, players[i].rect.tl(), players[i].rect.br(), CV_RGB(255, 255, 255), 2);
+           break;
+       case Purple: rectangle(img, players[i].rect.tl(), players[i].rect.br(), CV_RGB(95, 51, 91), 2);
+           break;
+       }
+   }
+}
 
 int main() {
-
-    // Create a VideoCapture object and use camera to capture the video
-    VideoCapture cap("C:\\Users\\jbnlu\\Pictures\\Bouncing.mp4");
-
-    // Check if camera opened successfully
+    //clear the file if previously written in
+    ofstream clearFile("C:\\Users\\jbnlu\\Desktop\\positions.txt");
+    clearFile.close();
+    //load the video file
+    VideoCapture cap("C:\\Users\\jbnlu\\Pictures\\run2_2.mp4");
+    
+    // Check if file opened
     if (!cap.isOpened()) {
         cout << "Error opening video stream" << endl;
         return -1;
     }
 
-    // Default resolutions of the frame are obtained.The default resolutions are system dependent.
+    // Default resolutions of the frame are obtained. Since default is system dependent.
     int frame_width = cap.get(cv::CAP_PROP_FRAME_WIDTH);
     int frame_height = cap.get(cv::CAP_PROP_FRAME_HEIGHT);
 
-    // Define the codec and create VideoWriter object.The output is stored in 'outcpp.avi' file.
-    VideoWriter video("outcpp.avi", cv::VideoWriter::fourcc('M', 'J', 'P', 'G'), 10, Size(frame_width, frame_height));
+    // Define the codec and create VideoWriter object.The output is stored in specified file.
+    VideoWriter video("C://Users//jbnlu//Desktop//Tracking_Bound.avi", VideoWriter::fourcc('M', 'J', 'P', 'G'), 30, Size(frame_width, frame_height));
 
     while (1) {
-
         Mat frame;
         Mat copy;
-        cap >> frame;
+        Mat mask;
 
+        cap >> frame;
+        //if frame doesnt exist, stop the program (debug tool)
         if (frame.empty())
             break;
 
-        // Write the frame into the file 'outcpp.avi'
-        video.write(frame);
+        // Lowers the framerate. Not needed but makes it easier to see.
+        waitKey(100);
 
         frame.copyTo(copy);
 
-        cv::cvtColor(frame, frame, cv::COLOR_BGR2HSV);
-        cv::Mat mask;
+        cvtColor(frame, frame, COLOR_BGR2HSV);
+        locatePlayer(frame, bluemin, bluemax, Color::Blue);
+        locatePlayer(frame, purplemin, purplemax, Color::Purple);
 
-        cv::inRange(frame, bluemin, bluemax, mask);
+        drawPlayer(copy);
+        //writes vieo file to earlier specified location.
+        video.write(copy);
+        // Display the resulting video
+        imshow("Check", copy);
 
-        std::vector < std::vector < cv::Point>> contours;
-        cv::findContours(mask, contours, cv::RETR_TREE, cv::CHAIN_APPROX_NONE);
-        //cv::drawContours(copy, contours, -1, cv::Scalar(0, 255, 0), 2);
-
-
-        // Bounding BOX (Rectangle)
-        for (size_t i = 0; i < contours.size();++i) {
-            cv::Rect boundRect = cv::boundingRect(contours[i]);
-            if (boundRect.width > 5)
-                cv::rectangle(copy, boundRect.tl(), boundRect.br(), (0, 0, 0), 3);
-        }
-
-        // Display the resulting video to compare
-        imshow("Frame", frame);
-        imshow("test", copy);
         // Press  ESC on keyboard to  exit
         char c = (char)waitKey(1);
         if (c == 27)
