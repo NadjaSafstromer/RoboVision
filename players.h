@@ -12,7 +12,6 @@ class Player
 		Color color;
 		Point position;
 		Rect rect;
-
 		Player();
 		Player(Color color, Rect rect, int x, int y) {
 			this->position = Point(x,y);
