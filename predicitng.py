@@ -143,6 +143,3 @@ def rolling_prediction(model, initial_sequence, n_predictions, scaler=None):
     if scaler:
         return scaler.inverse_transform(predictions)
     return predictions
-
-# Example usage:
-# rolling_pred = rolling_prediction(model, X_test[0], len(y_test), scaler)
