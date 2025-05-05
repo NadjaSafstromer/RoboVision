@@ -4,25 +4,27 @@
 #include <iostream>
 #include <fstream>
 #include "players.h"
-
+int previous[4] = { 0 };
+int nextId = 1;
 using namespace std;
 using namespace cv;
 int purpleAmount[4] = {0};
 bool check = false;
-Scalar bluemin = cv::Scalar(102, 103, 102);
-Scalar bluemax = cv::Scalar(125, 255, 255);
-Scalar purplemin = cv::Scalar(138, 94, 105);
-Scalar purplemax = cv::Scalar(175.95, 255, 255);
+Scalar bluemin = Scalar(112, 103, 50);
+Scalar bluemax = Scalar(125, 255, 255);
+Scalar purplemin = Scalar(148, 94, 45);
+Scalar purplemax = Scalar(175.95, 255, 255);
+Scalar orangemin = Scalar(5, 150, 70);
+Scalar orangemax = Scalar(15, 255, 255);
 
-
-vector <Point> prior(4);
-vector <Point> currentBlue(4);
 vector <Point> blueCenter;
 vector <Point> purpleCenter;
+vector <Point> ballCenter;
 vector <Player> players;
 
 void locatePlayer(Mat img, Scalar low, Scalar high, Color color) {
     Mat mask;
+    Mat purpleMask, orangeMask;
     inRange(img, low, high, mask);
     vector < vector < Point>> contours;
     findContours(mask, contours, RETR_EXTERNAL, CHAIN_APPROX_SIMPLE);
@@ -33,7 +35,7 @@ void locatePlayer(Mat img, Scalar low, Scalar high, Color color) {
             //store the blue color center for the enemy team
             if (color == Color::Blue) {
                 int px = boundRect.x + boundRect.width / 2;
-                int py = boundRect.y + boundRect.width / 2;
+                int py = boundRect.y + boundRect.height / 2;
                 Point currentPlayerCenter(px, py);
                 blueCenter.push_back(currentPlayerCenter);
                
@@ -42,61 +44,71 @@ void locatePlayer(Mat img, Scalar low, Scalar high, Color color) {
             //store the purple color identifier center for id creation
             if (color == Color::Purple) {
                 int idx = boundRect.x + boundRect.width / 2;
-                int idy = boundRect.y + boundRect.width / 2;
+                int idy = boundRect.y + boundRect.height / 2;
                 Point currentPlayerIdCenter(idx, idy);
                 purpleCenter.push_back(currentPlayerIdCenter);
-               
+              
+            }
+            if (color == Color::Orange) {
+                ballCenter.clear();
+                int bdx = boundRect.x + boundRect.width / 2;
+                int bdy = boundRect.y + boundRect.height / 2;
+                Point currentBallCenter(bdx, bdy);
+                ballCenter.push_back(currentBallCenter);
             }
             players.emplace_back(color, boundRect, boundRect.x + boundRect.width / 2, boundRect.y + boundRect.height / 2);
         }
 }
 
 void playerId(Mat img) {
+    ofstream Positions("C:\\Users\\jbnlu\\Desktop\\positions.txt", ios::app);
+    if (!Positions.is_open()) {
+        cerr << "Failed to open file for writing." << endl;
+        return; // Return early if file can't be opened
+    }
     if (check == false) {
         for (size_t i = 0; i < blueCenter.size() && i < 4; ++i) {
-            cout << prior << endl;
             for (size_t j = 0; j < purpleCenter.size(); ++j) {
                 double dist = norm(blueCenter[i] - purpleCenter[j]);
-                if (dist < 25) {
-                    purpleAmount[i]++; // increment count
+                if (dist < 25 && purpleAmount[i] == 0) {
+                    // Assign unique ID
+                    purpleAmount[i] = nextId;
+                    nextId++;
                     cout << "id:" << purpleAmount[i] << ", " << blueCenter[i] << "," << endl;
+                    break; // no need to keep checking this one
                 }
             }
         }
         check = true;
-    }
-    if (check == true) {
+    }if (check == true) {
+        Positions << "Ball:" << ballCenter << endl;
         for (size_t i = 0; i < blueCenter.size() && i < 4; ++i) {
-               //creates and opens a file that will be used for data
-                ofstream Positions("C:\\Users\\jbnlu\\Desktop\\positions.txt", ios::app);
-                Positions << "id:" << purpleAmount[i] << ", " << blueCenter[i] << "," << endl;
-                Positions.close();
-                
-           
+            Positions << "id:" << purpleAmount[i] << ", " << blueCenter[i] << "," << endl;
         }
-    
+        Positions.close();
     }
 }
+
 
 //Drawing the bounding boxes for every player for visual clarifaction
 //Note that this will later be repurposed for trail creation
 void drawPlayer(Mat img) {
-    for (size_t i = 0; i < blueCenter.size(); i++) {
-       switch (players[i].color) {
-       case Blue: circle(img, blueCenter[i], 5, CV_RGB(255, 255, 255), 2);
-           break;
-       //case Purple: rectangle(img, players[i].rect.tl(), players[i].rect.br(), CV_RGB(95, 51, 91), 2);
-         //  break;
-       }
-   }
+    for (size_t i = 0; i < blueCenter.size(); ++i) {
+        circle(img, blueCenter[i], 25, CV_RGB(255, 255, 255), 2);
+    }
+
+    if (!ballCenter.empty()) {
+        circle(img, ballCenter[0], 10, CV_RGB(255, 255, 255), 2);
+    }
 }
+
 
 int main() {
     //clear the file if previously written in
     ofstream clearFile("C:\\Users\\jbnlu\\Desktop\\positions.txt");
     clearFile.close();
     //load the video file
-    VideoCapture cap("C:\\Users\\jbnlu\\Pictures\\run2_2.mp4");
+    VideoCapture cap("C:\\Users\\jbnlu\\Pictures\\robots.MP4");
     
     // Check if file opened
     if (!cap.isOpened()) {
@@ -126,8 +138,8 @@ int main() {
         cvtColor(frame, frame, COLOR_BGR2HSV);
         locatePlayer(frame, bluemin, bluemax, Color::Blue);
         locatePlayer(frame, purplemin, purplemax, Color::Purple);
+        locatePlayer(frame, orangemin, orangemax, Color::Orange);
         playerId(frame);
-
         drawPlayer(copy);
         blueCenter.clear();
         purpleCenter.clear();
@@ -135,7 +147,6 @@ int main() {
         video.write(copy);
         // Display the resulting video
         imshow("Check", copy);
-
         // Press  ESC on keyboard to  exit
         char c = (char)waitKey(1);
         if (c == 27)
