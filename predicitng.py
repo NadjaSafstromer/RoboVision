@@ -1,4 +1,3 @@
-# Enhanced Multivariate LSTM for Robot Path Prediction
 import numpy as np
 import matplotlib.pyplot as plt
 from sklearn.preprocessing import MinMaxScaler
@@ -42,7 +41,7 @@ X_train, y_train = X[:n_train], y[:n_train]
 X_val, y_val = X[n_train:n_train+n_val], y[n_train:n_train+n_val]
 X_test, y_test = X[n_train+n_val:], y[n_train+n_val:]
 
-# 2. Enhanced Model Architecture
+# 2. Model Architecture
 model = Sequential([
     LSTM(200, activation='tanh', input_shape=(n_steps_in, n_features), 
          return_sequences=True),
@@ -69,7 +68,7 @@ history = model.fit(
     verbose=1
 )
 
-# 4. Evaluation - Independent Predictions (Option A)
+# 4. Evaluation - Independent Predictions
 y_pred_scaled = model.predict(X_test)
 y_pred = scaler.inverse_transform(y_pred_scaled)
 y_test_actual = scaler.inverse_transform(y_test[:, 0, :])
@@ -126,7 +125,7 @@ plt.legend()
 plt.tight_layout()
 plt.show()
 
-# Optional: For multi-step rolling prediction (Option B)
+# rolling prediction (testing)
 def rolling_prediction(model, initial_sequence, n_predictions, scaler=None):
     predictions = []
     current_seq = initial_sequence.copy()
