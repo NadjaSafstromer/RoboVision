@@ -1,4 +1,5 @@
 import numpy as np
+import pandas as pd
 import matplotlib.pyplot as plt
 from sklearn.preprocessing import MinMaxScaler
 from sklearn.metrics import mean_squared_error, mean_absolute_error
@@ -7,21 +8,31 @@ from keras.layers import LSTM, Dense, Dropout
 from keras.callbacks import EarlyStopping, ReduceLROnPlateau
 
 # Load and preprocess data
-data_dir = r'C:\mydata\run1\r10.txt'
-data = np.loadtxt(data_dir, delimiter=',')
-x_y_yaw = data[:, [4, 3, 8]]  # Extract x, y, yaw columns
+# data_dir = r'C:\mydata\run1\r10.txt'
+# Load and preprocess data
+data_dir = '/Users/nadjasafstromer/Desktop/football_game_00.txt'
 
-# 1. Feature Scaling
+#df = pd.read_csv(data_dir, delim_whitespace=True)
+df = pd.read_csv(data_dir, sep='\s+', names=['step', 'env_id', 'entity', 'x', 'y'])
+
+# Choose the entity you want to predict, e.g., ball or a specific agent
+entity_name = 'ball'
+df_entity = df[df['entity'] == entity_name]
+
+# Sort by step to ensure correct time order
+df_entity = df_entity.sort_values(by='step')
+
+x_y = df_entity[['x', 'y']].values
+#df = pd.read_csv(data_dir, sep='\s+', names=['step', 'env_id', 'entity', 'x', 'y'])
+
 scaler = MinMaxScaler(feature_range=(-1, 1))
-x_y_yaw_scaled = scaler.fit_transform(x_y_yaw)
+x_y_scaled = scaler.fit_transform(x_y)
 
-# Parameters
 n_steps_in = 10  # Input time steps
 n_steps_out = 1  # Output time steps
 split_ratio = [0.7, 0.15, 0.15]  # Train/val/test split
-n_features = x_y_yaw_scaled.shape[1]  # Number of features
+n_features = x_y_scaled.shape[1]  # Number of features
 
-# Sequence splitting function
 def split_sequences(data, n_steps_in, n_steps_out):
     X, y = [], []
     for i in range(len(data) - n_steps_in - n_steps_out + 1):
@@ -32,7 +43,7 @@ def split_sequences(data, n_steps_in, n_steps_out):
     return np.array(X), np.array(y)
 
 # Prepare sequences
-X, y = split_sequences(x_y_yaw_scaled, n_steps_in, n_steps_out)
+X, y = split_sequences(x_y_scaled, n_steps_in, n_steps_out)
 
 # Split data
 n_train = int(len(X) * split_ratio[0])
@@ -73,19 +84,75 @@ y_pred_scaled = model.predict(X_test)
 y_pred = scaler.inverse_transform(y_pred_scaled)
 y_test_actual = scaler.inverse_transform(y_test[:, 0, :])
 
+# --- Part 1: Load and preprocess all entities ---
+entities_to_track = [
+    'ball',
+    'agent_blue_0', 'agent_blue_1', 'agent_blue_2',
+    'agent_blue_3', 'agent_blue_4', 'agent_blue_5'
+]
+
+entity_data = {}
+
+for entity in entities_to_track:
+    df_entity = df[df['entity'] == entity].sort_values(by='step')
+    x_y = df_entity[['x', 'y']].values
+    scaler = MinMaxScaler(feature_range=(-1, 1))
+    x_y_scaled = scaler.fit_transform(x_y)
+
+    X, y = split_sequences(x_y_scaled, n_steps_in, n_steps_out)
+
+    n_train = int(len(X) * split_ratio[0])
+    n_val = int(len(X) * split_ratio[1])
+    
+    data = {
+        'scaler': scaler,
+        'X_train': X[:n_train], 'y_train': y[:n_train],
+        'X_val': X[n_train:n_train+n_val], 'y_val': y[n_train:n_train+n_val],
+        'X_test': X[n_train+n_val:], 'y_test': y[n_train+n_val:]
+    }
+    
+    entity_data[entity] = data
+
+# --- Part 2: Train a model for each entity ---
+models = {}
+
+for entity, data in entity_data.items():
+    model = Sequential([
+        LSTM(200, activation='tanh', input_shape=(n_steps_in, n_features), return_sequences=True),
+        Dropout(0.2),
+        LSTM(100, activation='tanh'),
+        Dropout(0.2),
+        Dense(n_features)
+    ])
+    
+    model.compile(optimizer='adam', loss='mse')
+    
+    history = model.fit(
+        data['X_train'], data['y_train'][:, 0, :],
+        epochs=300,
+        batch_size=32,
+        validation_data=(data['X_val'], data['y_val'][:, 0, :]),
+        callbacks=callbacks,
+        verbose=0
+    )
+    
+    models[entity] = {
+        'model': model,
+        'history': history
+    }
+    
+    print(f"Trained model for {entity}")
+
 # 5. Metrics Calculation
 def print_metrics(actual, predicted):
     rmse_x = np.sqrt(mean_squared_error(actual[:, 0], predicted[:, 0]))
     rmse_y = np.sqrt(mean_squared_error(actual[:, 1], predicted[:, 1]))
-    rmse_yaw = np.sqrt(mean_squared_error(actual[:, 2], predicted[:, 2]))
     
     mae_x = mean_absolute_error(actual[:, 0], predicted[:, 0])
     mae_y = mean_absolute_error(actual[:, 1], predicted[:, 1])
-    mae_yaw = mean_absolute_error(actual[:, 2], predicted[:, 2])
     
     print(f"X - RMSE: {rmse_x:.4f}, MAE: {mae_x:.4f}")
     print(f"Y - RMSE: {rmse_y:.4f}, MAE: {mae_y:.4f}")
-    print(f"Yaw - RMSE: {rmse_yaw:.4f}, MAE: {mae_yaw:.4f}")
     print(f"Overall RMSE: {np.sqrt(mean_squared_error(actual, predicted)):.4f}")
 
 print("\nTest Set Metrics:")
@@ -125,6 +192,8 @@ plt.legend()
 plt.tight_layout()
 plt.show()
 
+
+
 # rolling prediction (testing)
 def rolling_prediction(model, initial_sequence, n_predictions, scaler=None):
     predictions = []
@@ -142,3 +211,45 @@ def rolling_prediction(model, initial_sequence, n_predictions, scaler=None):
     if scaler:
         return scaler.inverse_transform(predictions)
     return predictions
+
+# Select the entity to inspect
+target_entity = 'agent_blue_0'
+
+# Retrieve the model and data
+model = models[target_entity]['model']
+data = entity_data[target_entity]
+
+# Predict
+y_pred_scaled = model.predict(data['X_test'])
+y_pred = data['scaler'].inverse_transform(y_pred_scaled)
+y_actual = data['scaler'].inverse_transform(data['y_test'][:, 0, :])
+
+# Print metrics
+print(f"\n{target_entity} Test Set Metrics:")
+print_metrics(y_actual, y_pred)
+
+# Plot actual vs predicted
+plt.figure(figsize=(12, 6))
+
+# Path comparison
+plt.subplot(1, 2, 1)
+plt.plot(y_actual[:, 0], y_actual[:, 1], 'b-', label='Actual Path')
+plt.plot(y_pred[:, 0], y_pred[:, 1], 'r--', label='Predicted Path')
+plt.title(f'{target_entity} - Path Comparison')
+plt.xlabel('X')
+plt.ylabel('Y')
+plt.legend()
+
+# X and Y over time
+plt.subplot(1, 2, 2)
+plt.plot(y_actual[:, 0], 'b-', label='Actual X')
+plt.plot(y_pred[:, 0], 'r--', label='Predicted X')
+plt.plot(y_actual[:, 1], 'g-', label='Actual Y')
+plt.plot(y_pred[:, 1], 'm--', label='Predicted Y')
+plt.title(f'{target_entity} - X/Y Over Time')
+plt.xlabel('Timestep')
+plt.ylabel('Position')
+plt.legend()
+
+plt.tight_layout()
+plt.show()
