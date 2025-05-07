@@ -1,0 +1,26 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+      {
+        "label": "Build ColourIdentify",
+        "type": "shell",
+        "command": "g++",
+        "args": [
+          "-g",
+          "ColourIdentify.cpp",
+          "-o",
+          "ColourIdentify.exe",
+          "-ID:/tools/vcpkg/installed/x64-windows/include/opencv4",
+          "-LD:/tools/vcpkg/installed/x64-windows/lib",
+          "-lopencv_core",
+          "-lopencv_imgproc",
+          "-lopencv_highgui"
+        ],
+        "group": {
+          "kind": "build",
+          "isDefault": true
+        }
+      }
+    ]
+  }
+  

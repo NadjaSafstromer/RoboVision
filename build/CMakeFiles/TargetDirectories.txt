@@ -1,0 +1,3 @@
+D:/Dokument/AI Course/RoboVision/build/CMakeFiles/ColourIdentify.dir
+D:/Dokument/AI Course/RoboVision/build/CMakeFiles/ALL_BUILD.dir
+D:/Dokument/AI Course/RoboVision/build/CMakeFiles/ZERO_CHECK.dir

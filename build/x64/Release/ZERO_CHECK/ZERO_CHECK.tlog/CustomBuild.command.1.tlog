@@ -1,0 +1,10 @@
+^D:\DOKUMENT\AI COURSE\ROBOVISION\BUILD\CMAKEFILES\63DFDB237F5993A0FB9E6E54220F62EC\GENERATE.STAMP.RULE
+setlocal
+"D:\Program Files\bin\cmake.exe" "-SD:/Dokument/AI Course/RoboVision" "-BD:/Dokument/AI Course/RoboVision/build" --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file "D:/Dokument/AI Course/RoboVision/build/ColourIdentify.sln"
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd

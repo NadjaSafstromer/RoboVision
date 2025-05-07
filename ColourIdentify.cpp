@@ -5,7 +5,7 @@
 cv::Scalar bluemin = cv::Scalar(102.5, 153, 102);
 cv::Scalar bluemax = cv::Scalar(125, 255, 255);
 int main() {
-    cv::Mat enemy = cv::imread("C:\\Users\\jbnlu\\Pictures\\RobotTest.JPG");
+    cv::Mat enemy = cv::imread("D:/Dokument/AI Course/Material/RobotTest.JPG");
     if (enemy.empty()) {
         std::cout << "Could not read the image\n";
         return 1;
