@@ -2,6 +2,7 @@
   "configurations": [
     {
       "name": "windows-gcc-x64",
+      "includePath": [
         "${workspaceFolder}/**",
          "D:/tools/vcpkg/installed/x64-windows/include/opencv4"
       ],
