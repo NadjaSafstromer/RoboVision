@@ -22,11 +22,11 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{96C98707-B53C-3D1F-9BB8-4831DD511B85}</ProjectGuid>
+    <ProjectGuid>{0156943A-E1DA-364C-8755-DBCA7FC169BE}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <WindowsTargetPlatformVersion>10.0.22621.0</WindowsTargetPlatformVersion>
     <Platform>x64</Platform>
-    <ProjectName>ColourIdentify</ProjectName>
+    <ProjectName>VievVideo</ProjectName>
     <VCProjectUpgraderObjectName>NoUpgrade</VCProjectUpgraderObjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -60,26 +60,26 @@
   <PropertyGroup>
     <_ProjectFileVersion>10.0.20506.1</_ProjectFileVersion>
     <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:\Dokument\AI Course\RoboVision\build\Debug\</OutDir>
-    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">ColourIdentify.dir\Debug\</IntDir>
-    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">ColourIdentify</TargetName>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">VievVideo.dir\Debug\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">VievVideo</TargetName>
     <TargetExt Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.exe</TargetExt>
     <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</LinkIncremental>
     <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</GenerateManifest>
     <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:\Dokument\AI Course\RoboVision\build\Release\</OutDir>
-    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">ColourIdentify.dir\Release\</IntDir>
-    <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">ColourIdentify</TargetName>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">VievVideo.dir\Release\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">VievVideo</TargetName>
     <TargetExt Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.exe</TargetExt>
     <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkIncremental>
     <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</GenerateManifest>
     <OutDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">D:\Dokument\AI Course\RoboVision\build\MinSizeRel\</OutDir>
-    <IntDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">ColourIdentify.dir\MinSizeRel\</IntDir>
-    <TargetName Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">ColourIdentify</TargetName>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">VievVideo.dir\MinSizeRel\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">VievVideo</TargetName>
     <TargetExt Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">.exe</TargetExt>
     <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</LinkIncremental>
     <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">true</GenerateManifest>
     <OutDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">D:\Dokument\AI Course\RoboVision\build\RelWithDebInfo\</OutDir>
-    <IntDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">ColourIdentify.dir\RelWithDebInfo\</IntDir>
-    <TargetName Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">ColourIdentify</TargetName>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">VievVideo.dir\RelWithDebInfo\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">VievVideo</TargetName>
     <TargetExt Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">.exe</TargetExt>
     <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">true</LinkIncremental>
     <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">true</GenerateManifest>
@@ -124,8 +124,8 @@
       <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
-      <ImportLibrary>D:/Dokument/AI Course/RoboVision/build/Debug/ColourIdentify.lib</ImportLibrary>
-      <ProgramDataBaseFile>D:/Dokument/AI Course/RoboVision/build/Debug/ColourIdentify.pdb</ProgramDataBaseFile>
+      <ImportLibrary>D:/Dokument/AI Course/RoboVision/build/Debug/VievVideo.lib</ImportLibrary>
+      <ProgramDataBaseFile>D:/Dokument/AI Course/RoboVision/build/Debug/VievVideo.pdb</ProgramDataBaseFile>
       <SubSystem>Console</SubSystem>
     </Link>
     <ProjectReference>
@@ -173,8 +173,8 @@
       <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
       <GenerateDebugInformation>false</GenerateDebugInformation>
       <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
-      <ImportLibrary>D:/Dokument/AI Course/RoboVision/build/Release/ColourIdentify.lib</ImportLibrary>
-      <ProgramDataBaseFile>D:/Dokument/AI Course/RoboVision/build/Release/ColourIdentify.pdb</ProgramDataBaseFile>
+      <ImportLibrary>D:/Dokument/AI Course/RoboVision/build/Release/VievVideo.lib</ImportLibrary>
+      <ProgramDataBaseFile>D:/Dokument/AI Course/RoboVision/build/Release/VievVideo.pdb</ProgramDataBaseFile>
       <SubSystem>Console</SubSystem>
     </Link>
     <ProjectReference>
@@ -222,8 +222,8 @@
       <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
       <GenerateDebugInformation>false</GenerateDebugInformation>
       <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
-      <ImportLibrary>D:/Dokument/AI Course/RoboVision/build/MinSizeRel/ColourIdentify.lib</ImportLibrary>
-      <ProgramDataBaseFile>D:/Dokument/AI Course/RoboVision/build/MinSizeRel/ColourIdentify.pdb</ProgramDataBaseFile>
+      <ImportLibrary>D:/Dokument/AI Course/RoboVision/build/MinSizeRel/VievVideo.lib</ImportLibrary>
+      <ProgramDataBaseFile>D:/Dokument/AI Course/RoboVision/build/MinSizeRel/VievVideo.pdb</ProgramDataBaseFile>
       <SubSystem>Console</SubSystem>
     </Link>
     <ProjectReference>
@@ -270,8 +270,8 @@
       <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
-      <ImportLibrary>D:/Dokument/AI Course/RoboVision/build/RelWithDebInfo/ColourIdentify.lib</ImportLibrary>
-      <ProgramDataBaseFile>D:/Dokument/AI Course/RoboVision/build/RelWithDebInfo/ColourIdentify.pdb</ProgramDataBaseFile>
+      <ImportLibrary>D:/Dokument/AI Course/RoboVision/build/RelWithDebInfo/VievVideo.lib</ImportLibrary>
+      <ProgramDataBaseFile>D:/Dokument/AI Course/RoboVision/build/RelWithDebInfo/VievVideo.pdb</ProgramDataBaseFile>
       <SubSystem>Console</SubSystem>
     </Link>
     <ProjectReference>
@@ -336,7 +336,7 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="D:\Dokument\AI Course\RoboVision\ColourIdentify.cpp" />
+    <ClCompile Include="D:\Dokument\AI Course\RoboVision\VievVideo.cpp" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

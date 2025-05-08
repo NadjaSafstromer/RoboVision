@@ -1,3 +1,3 @@
 #pragma once
 
-enum Color {Blue, Purple};
+enum Color {Blue, Purple, Yellow};

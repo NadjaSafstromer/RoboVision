@@ -3,41 +3,23 @@
   "configurations": [
     {
       "name": "Run ColourIdentify",
-      "type": "cppdbg",
+      "type": "cppvsdbg",
       "request": "launch",
-      "program": "${workspaceFolder}/ColourIdentify.exe",
+      "program": "${workspaceFolder}/build/Release/ColourIdentify.exe",
       "args": [],
       "stopAtEntry": false,
       "cwd": "${workspaceFolder}",
-      "externalConsole": true,
-      "MIMode": "gdb",
-      "miDebuggerPath": "gdb",
-      "setupCommands": [
-        {
-          "description": "Enable pretty-printing for gdb",
-          "text": "-enable-pretty-printing",
-          "ignoreFailures": true
-        }
-      ]
+      "console": "externalTerminal"
     },
     {
-      "name": "C/C++ Runner: Debug Session",
-      "type": "cppdbg",
+      "name": "Run VievVideo",
+      "type": "cppvsdbg",
       "request": "launch",
+      "program": "${workspaceFolder}/build/Release/VievVideo.exe",
       "args": [],
       "stopAtEntry": false,
-      "externalConsole": true,
-      "cwd": "d:/Dokument/AI Course/RoboVision",
-      "program": "d:/Dokument/AI Course/RoboVision/build/Debug/outDebug",
-      "MIMode": "gdb",
-      "miDebuggerPath": "gdb",
-      "setupCommands": [
-        {
-          "description": "Enable pretty-printing for gdb",
-          "text": "-enable-pretty-printing",
-          "ignoreFailures": true
-        }
-      ]
+      "cwd": "${workspaceFolder}",
+      "console": "externalTerminal"
     }
   ]
 }
