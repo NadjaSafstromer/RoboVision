@@ -8,7 +8,7 @@ int previous[4] = { 0 };
 int nextId = 1;
 using namespace std;
 using namespace cv;
-int purpleAmount[4] = {0};
+int purpleAmount[4] = { 0 };
 bool check = false;
 Scalar bluemin = Scalar(112, 103, 50);
 Scalar bluemax = Scalar(125, 255, 255);
@@ -32,32 +32,32 @@ void locatePlayer(Mat img, Scalar low, Scalar high, Color color) {
     // Position Tracking
     for (size_t i = 0; i < contours.size();++i) {
         Rect boundRect = boundingRect(contours[i]);
-            //store the blue color center for the enemy team
-            if (color == Color::Blue) {
-                int px = boundRect.x + boundRect.width / 2;
-                int py = boundRect.y + boundRect.height / 2;
-                Point currentPlayerCenter(px, py);
-                blueCenter.push_back(currentPlayerCenter);
-               
+        //store the blue color center for the enemy team
+        if (color == Color::Blue) {
+            int px = boundRect.x + boundRect.width / 2;
+            int py = boundRect.y + boundRect.height / 2;
+            Point currentPlayerCenter(px, py);
+            blueCenter.push_back(currentPlayerCenter);
 
-            }
-            //store the purple color identifier center for id creation
-            if (color == Color::Purple) {
-                int idx = boundRect.x + boundRect.width / 2;
-                int idy = boundRect.y + boundRect.height / 2;
-                Point currentPlayerIdCenter(idx, idy);
-                purpleCenter.push_back(currentPlayerIdCenter);
-              
-            }
-            if (color == Color::Orange) {
-                ballCenter.clear();
-                int bdx = boundRect.x + boundRect.width / 2;
-                int bdy = boundRect.y + boundRect.height / 2;
-                Point currentBallCenter(bdx, bdy);
-                ballCenter.push_back(currentBallCenter);
-            }
-            players.emplace_back(color, boundRect, boundRect.x + boundRect.width / 2, boundRect.y + boundRect.height / 2);
+
         }
+        //store the purple color identifier center for id creation
+        if (color == Color::Purple) {
+            int idx = boundRect.x + boundRect.width / 2;
+            int idy = boundRect.y + boundRect.height / 2;
+            Point currentPlayerIdCenter(idx, idy);
+            purpleCenter.push_back(currentPlayerIdCenter);
+
+        }
+        if (color == Color::Orange) {
+            ballCenter.clear();
+            int bdx = boundRect.x + boundRect.width / 2;
+            int bdy = boundRect.y + boundRect.height / 2;
+            Point currentBallCenter(bdx, bdy);
+            ballCenter.push_back(currentBallCenter);
+        }
+        players.emplace_back(color, boundRect, boundRect.x + boundRect.width / 2, boundRect.y + boundRect.height / 2);
+    }
 }
 
 void playerId(Mat img) {
@@ -72,18 +72,21 @@ void playerId(Mat img) {
                 double dist = norm(blueCenter[i] - purpleCenter[j]);
                 if (dist < 25 && purpleAmount[i] == 0) {
                     // Assign unique ID
+
                     purpleAmount[i] = nextId;
                     nextId++;
-                    cout << "id:" << purpleAmount[i] << ", " << blueCenter[i] << "," << endl;
+                    cout << "id:" << purpleAmount[i] << "," << -0.5 + blueCenter[i].x / 1000 << "," << endl;
                     break; // no need to keep checking this one
                 }
             }
         }
         check = true;
     }if (check == true) {
-        Positions << "Ball:" << ballCenter << endl;
+        Positions << "Ball " << ballCenter << endl;
         for (size_t i = 0; i < blueCenter.size() && i < 4; ++i) {
-            Positions << "id:" << purpleAmount[i] << ", " << blueCenter[i] << "," << endl;
+            float x = blueCenter[i].x;
+            float y = blueCenter[i].y;
+            Positions << purpleAmount[i] << "," << -0.5 + x/1000 << "," << 0.8 - y/1000 << endl;
         }
         Positions.close();
     }
@@ -108,8 +111,8 @@ int main() {
     ofstream clearFile("C:\\Users\\jbnlu\\Desktop\\positions.txt");
     clearFile.close();
     //load the video file
-    VideoCapture cap("C:\\Users\\jbnlu\\Pictures\\robots.MP4");
-    
+    VideoCapture cap("C:\\Users\\jbnlu\\Pictures\\run2_2.MP4");
+
     // Check if file opened
     if (!cap.isOpened()) {
         cout << "Error opening video stream" << endl;
