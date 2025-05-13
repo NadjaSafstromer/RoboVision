@@ -135,7 +135,7 @@ int frameCounter = 0;
 
 void drawPlayer(Mat img) {
     for (size_t i = 0; i < blueCenter.size(); ++i) {
-        circle(img, blueCenter[i], 25, CV_RGB(255, 255, 255), 2);
+        circle(img, blueCenter[i], 25, CV_RGB(255, 0, 0), 2);
     }
 
     bool blinkOn = (frameCounter % 20) < 10;  // blink function in order to distinguish our team;

@@ -1,4 +1,5 @@
 D:/Dokument/AI Course/RoboVision/build/CMakeFiles/ColourIdentify.dir
 D:/Dokument/AI Course/RoboVision/build/CMakeFiles/VievVideo.dir
+D:/Dokument/AI Course/RoboVision/build/CMakeFiles/Client.dir
 D:/Dokument/AI Course/RoboVision/build/CMakeFiles/ALL_BUILD.dir
 D:/Dokument/AI Course/RoboVision/build/CMakeFiles/ZERO_CHECK.dir

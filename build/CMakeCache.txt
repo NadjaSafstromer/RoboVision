@@ -77,7 +77,7 @@ CMAKE_EXE_LINKER_FLAGS_RELWITHDEBINFO:STRING=/debug /INCREMENTAL
 CMAKE_FIND_PACKAGE_REDIRECTS_DIR:STATIC=D:/Dokument/AI Course/RoboVision/build/CMakeFiles/pkgRedirects
 
 //Install path prefix, prepended onto install directories.
-CMAKE_INSTALL_PREFIX:PATH=C:/Program Files/ColourIdentify
+CMAKE_INSTALL_PREFIX:PATH=C:/Program Files (x86)/RoboVision
 
 //Path to a program.
 CMAKE_LINKER:FILEPATH=C:/Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/MSVC/14.43.34808/bin/Hostx64/x64/link.exe
@@ -186,15 +186,6 @@ CMAKE_STATIC_LINKER_FLAGS_RELWITHDEBINFO:STRING=
 CMAKE_VERBOSE_MAKEFILE:BOOL=FALSE
 
 //Value Computed by CMake
-ColourIdentify_BINARY_DIR:STATIC=D:/Dokument/AI Course/RoboVision/build
-
-//Value Computed by CMake
-ColourIdentify_IS_TOP_LEVEL:STATIC=ON
-
-//Value Computed by CMake
-ColourIdentify_SOURCE_DIR:STATIC=D:/Dokument/AI Course/RoboVision
-
-//Value Computed by CMake
 RoboVision_BINARY_DIR:STATIC=D:/Dokument/AI Course/RoboVision/build
 
 //Value Computed by CMake
@@ -267,7 +258,7 @@ CMAKE_GENERATOR:INTERNAL=Visual Studio 17 2022
 //Generator instance identifier.
 CMAKE_GENERATOR_INSTANCE:INTERNAL=C:/Program Files/Microsoft Visual Studio/2022/Community
 //Name of generator platform.
-CMAKE_GENERATOR_PLATFORM:INTERNAL=x64
+CMAKE_GENERATOR_PLATFORM:INTERNAL=
 //Name of generator toolset.
 CMAKE_GENERATOR_TOOLSET:INTERNAL=
 //Source directory with the top level CMakeLists.txt file for this

@@ -24,7 +24,7 @@ events:
       The output was:
       0
       MSBuild version 17.13.19+0d9f5a35a for .NET Framework
-      Build started 2025-05-06 21:16:59.
+      Build started 2025-05-13 12:32:20.
       
       Project "D:\\Dokument\\AI Course\\RoboVision\\build\\CMakeFiles\\4.0.1\\CompilerIdC\\CompilerIdC.vcxproj" on node 1 (default targets).
       PrepareForBuild:
@@ -62,7 +62,7 @@ events:
           0 Warning(s)
           0 Error(s)
       
-      Time Elapsed 00:00:02.31
+      Time Elapsed 00:00:03.17
       
       
       Compilation of the C compiler identification source "CMakeCCompilerId.c" produced "CompilerIdC.exe"
@@ -88,7 +88,7 @@ events:
       The output was:
       0
       MSBuild version 17.13.19+0d9f5a35a for .NET Framework
-      Build started 2025-05-06 21:17:02.
+      Build started 2025-05-13 12:32:24.
       
       Project "D:\\Dokument\\AI Course\\RoboVision\\build\\CMakeFiles\\4.0.1\\CompilerIdCXX\\CompilerIdCXX.vcxproj" on node 1 (default targets).
       PrepareForBuild:
@@ -126,7 +126,7 @@ events:
           0 Warning(s)
           0 Error(s)
       
-      Time Elapsed 00:00:01.51
+      Time Elapsed 00:00:02.36
       
       
       Compilation of the CXX compiler identification source "CMakeCXXCompilerId.cpp" produced "CompilerIdCXX.exe"
@@ -145,8 +145,8 @@ events:
     checks:
       - "Detecting C compiler ABI info"
     directories:
-      source: "D:/Dokument/AI Course/RoboVision/build/CMakeFiles/CMakeScratch/TryCompile-4atel7"
-      binary: "D:/Dokument/AI Course/RoboVision/build/CMakeFiles/CMakeScratch/TryCompile-4atel7"
+      source: "D:/Dokument/AI Course/RoboVision/build/CMakeFiles/CMakeScratch/TryCompile-dmuden"
+      binary: "D:/Dokument/AI Course/RoboVision/build/CMakeFiles/CMakeScratch/TryCompile-dmuden"
     cmakeVariables:
       CMAKE_C_FLAGS: "/DWIN32 /D_WINDOWS /W3"
       CMAKE_C_FLAGS_DEBUG: "/MDd /Zi /Ob0 /Od /RTC1"
@@ -155,49 +155,49 @@ events:
       variable: "CMAKE_C_ABI_COMPILED"
       cached: true
       stdout: |
-        Change Dir: 'D:/Dokument/AI Course/RoboVision/build/CMakeFiles/CMakeScratch/TryCompile-4atel7'
+        Change Dir: 'D:/Dokument/AI Course/RoboVision/build/CMakeFiles/CMakeScratch/TryCompile-dmuden'
         
-        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/2022/Community/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_d8a4d.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:n
+        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/2022/Community/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_dcd44.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:n
         MSBuild version 17.13.19+0d9f5a35a for .NET Framework
-        Build started 2025-05-06 21:17:04.
+        Build started 2025-05-13 12:32:27.
         
-        Project "D:\\Dokument\\AI Course\\RoboVision\\build\\CMakeFiles\\CMakeScratch\\TryCompile-4atel7\\cmTC_d8a4d.vcxproj" on node 1 (default targets).
+        Project "D:\\Dokument\\AI Course\\RoboVision\\build\\CMakeFiles\\CMakeScratch\\TryCompile-dmuden\\cmTC_dcd44.vcxproj" on node 1 (default targets).
         PrepareForBuild:
-          Creating directory "cmTC_d8a4d.dir\\Debug\\".
+          Creating directory "cmTC_dcd44.dir\\Debug\\".
           Structured output is enabled. The formatting of compiler diagnostics will reflect the error hierarchy. See https://aka.ms/cpp/structured-output for more details.
-          Creating directory "D:\\Dokument\\AI Course\\RoboVision\\build\\CMakeFiles\\CMakeScratch\\TryCompile-4atel7\\Debug\\".
-          Creating directory "cmTC_d8a4d.dir\\Debug\\cmTC_d8a4d.tlog\\".
+          Creating directory "D:\\Dokument\\AI Course\\RoboVision\\build\\CMakeFiles\\CMakeScratch\\TryCompile-dmuden\\Debug\\".
+          Creating directory "cmTC_dcd44.dir\\Debug\\cmTC_dcd44.tlog\\".
         InitializeBuildStatus:
-          Creating "cmTC_d8a4d.dir\\Debug\\cmTC_d8a4d.tlog\\unsuccessfulbuild" because "AlwaysCreate" was specified.
-          Touching "cmTC_d8a4d.dir\\Debug\\cmTC_d8a4d.tlog\\unsuccessfulbuild".
+          Creating "cmTC_dcd44.dir\\Debug\\cmTC_dcd44.tlog\\unsuccessfulbuild" because "AlwaysCreate" was specified.
+          Touching "cmTC_dcd44.dir\\Debug\\cmTC_dcd44.tlog\\unsuccessfulbuild".
         VcpkgTripletSelection:
           Using triplet "x64-windows" from "D:\\tools\\vcpkg\\installed\\x64-windows\\"
           Using normalized configuration "Debug"
         ClCompile:
-          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.43.34808\\bin\\HostX64\\x64\\CL.exe /c /I"D:\\tools\\vcpkg\\installed\\x64-windows\\include" /Zi /W3 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\\"Debug\\"" /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_d8a4d.dir\\Debug\\\\" /Fd"cmTC_d8a4d.dir\\Debug\\vc143.pdb" /external:W3 /Gd /TC /errorReport:queue "D:\\Program Files\\share\\cmake-4.0\\Modules\\CMakeCCompilerABI.c"
+          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.43.34808\\bin\\HostX64\\x64\\CL.exe /c /I"D:\\tools\\vcpkg\\installed\\x64-windows\\include" /Zi /W3 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\\"Debug\\"" /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_dcd44.dir\\Debug\\\\" /Fd"cmTC_dcd44.dir\\Debug\\vc143.pdb" /external:W3 /Gd /TC /errorReport:queue "D:\\Program Files\\share\\cmake-4.0\\Modules\\CMakeCCompilerABI.c"
           Microsoft (R) C/C++ Optimizing Compiler Version 19.43.34810 for x64
           Copyright (C) Microsoft Corporation.  All rights reserved.
-          cl /c /I"D:\\tools\\vcpkg\\installed\\x64-windows\\include" /Zi /W3 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\\"Debug\\"" /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_d8a4d.dir\\Debug\\\\" /Fd"cmTC_d8a4d.dir\\Debug\\vc143.pdb" /external:W3 /Gd /TC /errorReport:queue "D:\\Program Files\\share\\cmake-4.0\\Modules\\CMakeCCompilerABI.c"
+          cl /c /I"D:\\tools\\vcpkg\\installed\\x64-windows\\include" /Zi /W3 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\\"Debug\\"" /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_dcd44.dir\\Debug\\\\" /Fd"cmTC_dcd44.dir\\Debug\\vc143.pdb" /external:W3 /Gd /TC /errorReport:queue "D:\\Program Files\\share\\cmake-4.0\\Modules\\CMakeCCompilerABI.c"
           CMakeCCompilerABI.c
         Link:
-          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.43.34808\\bin\\HostX64\\x64\\link.exe /ERRORREPORT:QUEUE /OUT:"D:\\Dokument\\AI Course\\RoboVision\\build\\CMakeFiles\\CMakeScratch\\TryCompile-4atel7\\Debug\\cmTC_d8a4d.exe" /INCREMENTAL /ILK:"cmTC_d8a4d.dir\\Debug\\cmTC_d8a4d.ilk" /NOLOGO /LIBPATH:"D:\\tools\\vcpkg\\installed\\x64-windows\\debug\\lib" /LIBPATH:"D:\\tools\\vcpkg\\installed\\x64-windows\\debug\\lib\\manual-link" kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib "D:\\tools\\vcpkg\\installed\\x64-windows\\debug\\lib\\*.lib" /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"D:/Dokument/AI Course/RoboVision/build/CMakeFiles/CMakeScratch/TryCompile-4atel7/Debug/cmTC_d8a4d.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:/Dokument/AI Course/RoboVision/build/CMakeFiles/CMakeScratch/TryCompile-4atel7/Debug/cmTC_d8a4d.lib" /MACHINE:X64  /machine:x64 cmTC_d8a4d.dir\\Debug\\CMakeCCompilerABI.obj
-          cmTC_d8a4d.vcxproj -> D:\\Dokument\\AI Course\\RoboVision\\build\\CMakeFiles\\CMakeScratch\\TryCompile-4atel7\\Debug\\cmTC_d8a4d.exe
+          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.43.34808\\bin\\HostX64\\x64\\link.exe /ERRORREPORT:QUEUE /OUT:"D:\\Dokument\\AI Course\\RoboVision\\build\\CMakeFiles\\CMakeScratch\\TryCompile-dmuden\\Debug\\cmTC_dcd44.exe" /INCREMENTAL /ILK:"cmTC_dcd44.dir\\Debug\\cmTC_dcd44.ilk" /NOLOGO /LIBPATH:"D:\\tools\\vcpkg\\installed\\x64-windows\\debug\\lib" /LIBPATH:"D:\\tools\\vcpkg\\installed\\x64-windows\\debug\\lib\\manual-link" kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib "D:\\tools\\vcpkg\\installed\\x64-windows\\debug\\lib\\*.lib" /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"D:/Dokument/AI Course/RoboVision/build/CMakeFiles/CMakeScratch/TryCompile-dmuden/Debug/cmTC_dcd44.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:/Dokument/AI Course/RoboVision/build/CMakeFiles/CMakeScratch/TryCompile-dmuden/Debug/cmTC_dcd44.lib" /MACHINE:X64  /machine:x64 cmTC_dcd44.dir\\Debug\\CMakeCCompilerABI.obj
+          cmTC_dcd44.vcxproj -> D:\\Dokument\\AI Course\\RoboVision\\build\\CMakeFiles\\CMakeScratch\\TryCompile-dmuden\\Debug\\cmTC_dcd44.exe
         AppLocalFromInstalled:
-          pwsh.exe -ExecutionPolicy Bypass -noprofile -File "D:\\tools\\vcpkg\\scripts\\buildsystems\\msbuild\\applocal.ps1" "D:\\Dokument\\AI Course\\RoboVision\\build\\CMakeFiles\\CMakeScratch\\TryCompile-4atel7\\Debug\\cmTC_d8a4d.exe" "D:\\tools\\vcpkg\\installed\\x64-windows\\debug\\bin" "cmTC_d8a4d.dir\\Debug\\cmTC_d8a4d.tlog\\cmTC_d8a4d.write.1u.tlog" "cmTC_d8a4d.dir\\Debug\\vcpkg.applocal.log"
+          pwsh.exe -ExecutionPolicy Bypass -noprofile -File "D:\\tools\\vcpkg\\scripts\\buildsystems\\msbuild\\applocal.ps1" "D:\\Dokument\\AI Course\\RoboVision\\build\\CMakeFiles\\CMakeScratch\\TryCompile-dmuden\\Debug\\cmTC_dcd44.exe" "D:\\tools\\vcpkg\\installed\\x64-windows\\debug\\bin" "cmTC_dcd44.dir\\Debug\\cmTC_dcd44.tlog\\cmTC_dcd44.write.1u.tlog" "cmTC_dcd44.dir\\Debug\\vcpkg.applocal.log"
           'pwsh.exe' is not recognized as an internal or external command,
           operable program or batch file.
-          The command "pwsh.exe -ExecutionPolicy Bypass -noprofile -File "D:\\tools\\vcpkg\\scripts\\buildsystems\\msbuild\\applocal.ps1" "D:\\Dokument\\AI Course\\RoboVision\\build\\CMakeFiles\\CMakeScratch\\TryCompile-4atel7\\Debug\\cmTC_d8a4d.exe" "D:\\tools\\vcpkg\\installed\\x64-windows\\debug\\bin" "cmTC_d8a4d.dir\\Debug\\cmTC_d8a4d.tlog\\cmTC_d8a4d.write.1u.tlog" "cmTC_d8a4d.dir\\Debug\\vcpkg.applocal.log"" exited with code 9009.
-          "C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\powershell.exe" -ExecutionPolicy Bypass -noprofile -File "D:\\tools\\vcpkg\\scripts\\buildsystems\\msbuild\\applocal.ps1" "D:\\Dokument\\AI Course\\RoboVision\\build\\CMakeFiles\\CMakeScratch\\TryCompile-4atel7\\Debug\\cmTC_d8a4d.exe" "D:\\tools\\vcpkg\\installed\\x64-windows\\debug\\bin" "cmTC_d8a4d.dir\\Debug\\cmTC_d8a4d.tlog\\cmTC_d8a4d.write.1u.tlog" "cmTC_d8a4d.dir\\Debug\\vcpkg.applocal.log"
+          The command "pwsh.exe -ExecutionPolicy Bypass -noprofile -File "D:\\tools\\vcpkg\\scripts\\buildsystems\\msbuild\\applocal.ps1" "D:\\Dokument\\AI Course\\RoboVision\\build\\CMakeFiles\\CMakeScratch\\TryCompile-dmuden\\Debug\\cmTC_dcd44.exe" "D:\\tools\\vcpkg\\installed\\x64-windows\\debug\\bin" "cmTC_dcd44.dir\\Debug\\cmTC_dcd44.tlog\\cmTC_dcd44.write.1u.tlog" "cmTC_dcd44.dir\\Debug\\vcpkg.applocal.log"" exited with code 9009.
+          "C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\powershell.exe" -ExecutionPolicy Bypass -noprofile -File "D:\\tools\\vcpkg\\scripts\\buildsystems\\msbuild\\applocal.ps1" "D:\\Dokument\\AI Course\\RoboVision\\build\\CMakeFiles\\CMakeScratch\\TryCompile-dmuden\\Debug\\cmTC_dcd44.exe" "D:\\tools\\vcpkg\\installed\\x64-windows\\debug\\bin" "cmTC_dcd44.dir\\Debug\\cmTC_dcd44.tlog\\cmTC_dcd44.write.1u.tlog" "cmTC_dcd44.dir\\Debug\\vcpkg.applocal.log"
         FinalizeBuildStatus:
-          Deleting file "cmTC_d8a4d.dir\\Debug\\cmTC_d8a4d.tlog\\unsuccessfulbuild".
-          Touching "cmTC_d8a4d.dir\\Debug\\cmTC_d8a4d.tlog\\cmTC_d8a4d.lastbuildstate".
-        Done Building Project "D:\\Dokument\\AI Course\\RoboVision\\build\\CMakeFiles\\CMakeScratch\\TryCompile-4atel7\\cmTC_d8a4d.vcxproj" (default targets).
+          Deleting file "cmTC_dcd44.dir\\Debug\\cmTC_dcd44.tlog\\unsuccessfulbuild".
+          Touching "cmTC_dcd44.dir\\Debug\\cmTC_dcd44.tlog\\cmTC_dcd44.lastbuildstate".
+        Done Building Project "D:\\Dokument\\AI Course\\RoboVision\\build\\CMakeFiles\\CMakeScratch\\TryCompile-dmuden\\cmTC_dcd44.vcxproj" (default targets).
         
         Build succeeded.
             0 Warning(s)
             0 Error(s)
         
-        Time Elapsed 00:00:01.54
+        Time Elapsed 00:00:02.36
         
       exitCode: 0
   -
@@ -237,8 +237,8 @@ events:
     checks:
       - "Detecting CXX compiler ABI info"
     directories:
-      source: "D:/Dokument/AI Course/RoboVision/build/CMakeFiles/CMakeScratch/TryCompile-tyd6tv"
-      binary: "D:/Dokument/AI Course/RoboVision/build/CMakeFiles/CMakeScratch/TryCompile-tyd6tv"
+      source: "D:/Dokument/AI Course/RoboVision/build/CMakeFiles/CMakeScratch/TryCompile-ymea3c"
+      binary: "D:/Dokument/AI Course/RoboVision/build/CMakeFiles/CMakeScratch/TryCompile-ymea3c"
     cmakeVariables:
       CMAKE_CXX_FLAGS: "/DWIN32 /D_WINDOWS /W3 /GR /EHsc"
       CMAKE_CXX_FLAGS_DEBUG: "/MDd /Zi /Ob0 /Od /RTC1"
@@ -248,49 +248,49 @@ events:
       variable: "CMAKE_CXX_ABI_COMPILED"
       cached: true
       stdout: |
-        Change Dir: 'D:/Dokument/AI Course/RoboVision/build/CMakeFiles/CMakeScratch/TryCompile-tyd6tv'
+        Change Dir: 'D:/Dokument/AI Course/RoboVision/build/CMakeFiles/CMakeScratch/TryCompile-ymea3c'
         
-        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/2022/Community/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_5db74.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:n
+        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/2022/Community/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_f53a8.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:n
         MSBuild version 17.13.19+0d9f5a35a for .NET Framework
-        Build started 2025-05-06 21:17:06.
+        Build started 2025-05-13 12:32:30.
         
-        Project "D:\\Dokument\\AI Course\\RoboVision\\build\\CMakeFiles\\CMakeScratch\\TryCompile-tyd6tv\\cmTC_5db74.vcxproj" on node 1 (default targets).
+        Project "D:\\Dokument\\AI Course\\RoboVision\\build\\CMakeFiles\\CMakeScratch\\TryCompile-ymea3c\\cmTC_f53a8.vcxproj" on node 1 (default targets).
         PrepareForBuild:
-          Creating directory "cmTC_5db74.dir\\Debug\\".
+          Creating directory "cmTC_f53a8.dir\\Debug\\".
           Structured output is enabled. The formatting of compiler diagnostics will reflect the error hierarchy. See https://aka.ms/cpp/structured-output for more details.
-          Creating directory "D:\\Dokument\\AI Course\\RoboVision\\build\\CMakeFiles\\CMakeScratch\\TryCompile-tyd6tv\\Debug\\".
-          Creating directory "cmTC_5db74.dir\\Debug\\cmTC_5db74.tlog\\".
+          Creating directory "D:\\Dokument\\AI Course\\RoboVision\\build\\CMakeFiles\\CMakeScratch\\TryCompile-ymea3c\\Debug\\".
+          Creating directory "cmTC_f53a8.dir\\Debug\\cmTC_f53a8.tlog\\".
         InitializeBuildStatus:
-          Creating "cmTC_5db74.dir\\Debug\\cmTC_5db74.tlog\\unsuccessfulbuild" because "AlwaysCreate" was specified.
-          Touching "cmTC_5db74.dir\\Debug\\cmTC_5db74.tlog\\unsuccessfulbuild".
+          Creating "cmTC_f53a8.dir\\Debug\\cmTC_f53a8.tlog\\unsuccessfulbuild" because "AlwaysCreate" was specified.
+          Touching "cmTC_f53a8.dir\\Debug\\cmTC_f53a8.tlog\\unsuccessfulbuild".
         VcpkgTripletSelection:
           Using triplet "x64-windows" from "D:\\tools\\vcpkg\\installed\\x64-windows\\"
           Using normalized configuration "Debug"
         ClCompile:
-          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.43.34808\\bin\\HostX64\\x64\\CL.exe /c /I"D:\\tools\\vcpkg\\installed\\x64-windows\\include" /Zi /W3 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\\"Debug\\"" /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /GR /Fo"cmTC_5db74.dir\\Debug\\\\" /Fd"cmTC_5db74.dir\\Debug\\vc143.pdb" /external:W3 /Gd /TP /errorReport:queue "D:\\Program Files\\share\\cmake-4.0\\Modules\\CMakeCXXCompilerABI.cpp"
+          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.43.34808\\bin\\HostX64\\x64\\CL.exe /c /I"D:\\tools\\vcpkg\\installed\\x64-windows\\include" /Zi /W3 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\\"Debug\\"" /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /GR /Fo"cmTC_f53a8.dir\\Debug\\\\" /Fd"cmTC_f53a8.dir\\Debug\\vc143.pdb" /external:W3 /Gd /TP /errorReport:queue "D:\\Program Files\\share\\cmake-4.0\\Modules\\CMakeCXXCompilerABI.cpp"
           Microsoft (R) C/C++ Optimizing Compiler Version 19.43.34810 for x64
           Copyright (C) Microsoft Corporation.  All rights reserved.
-          cl /c /I"D:\\tools\\vcpkg\\installed\\x64-windows\\include" /Zi /W3 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\\"Debug\\"" /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /GR /Fo"cmTC_5db74.dir\\Debug\\\\" /Fd"cmTC_5db74.dir\\Debug\\vc143.pdb" /external:W3 /Gd /TP /errorReport:queue "D:\\Program Files\\share\\cmake-4.0\\Modules\\CMakeCXXCompilerABI.cpp"
+          cl /c /I"D:\\tools\\vcpkg\\installed\\x64-windows\\include" /Zi /W3 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\\"Debug\\"" /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /GR /Fo"cmTC_f53a8.dir\\Debug\\\\" /Fd"cmTC_f53a8.dir\\Debug\\vc143.pdb" /external:W3 /Gd /TP /errorReport:queue "D:\\Program Files\\share\\cmake-4.0\\Modules\\CMakeCXXCompilerABI.cpp"
           CMakeCXXCompilerABI.cpp
         Link:
-          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.43.34808\\bin\\HostX64\\x64\\link.exe /ERRORREPORT:QUEUE /OUT:"D:\\Dokument\\AI Course\\RoboVision\\build\\CMakeFiles\\CMakeScratch\\TryCompile-tyd6tv\\Debug\\cmTC_5db74.exe" /INCREMENTAL /ILK:"cmTC_5db74.dir\\Debug\\cmTC_5db74.ilk" /NOLOGO /LIBPATH:"D:\\tools\\vcpkg\\installed\\x64-windows\\debug\\lib" /LIBPATH:"D:\\tools\\vcpkg\\installed\\x64-windows\\debug\\lib\\manual-link" kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib "D:\\tools\\vcpkg\\installed\\x64-windows\\debug\\lib\\*.lib" /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"D:/Dokument/AI Course/RoboVision/build/CMakeFiles/CMakeScratch/TryCompile-tyd6tv/Debug/cmTC_5db74.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:/Dokument/AI Course/RoboVision/build/CMakeFiles/CMakeScratch/TryCompile-tyd6tv/Debug/cmTC_5db74.lib" /MACHINE:X64  /machine:x64 cmTC_5db74.dir\\Debug\\CMakeCXXCompilerABI.obj
-          cmTC_5db74.vcxproj -> D:\\Dokument\\AI Course\\RoboVision\\build\\CMakeFiles\\CMakeScratch\\TryCompile-tyd6tv\\Debug\\cmTC_5db74.exe
+          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.43.34808\\bin\\HostX64\\x64\\link.exe /ERRORREPORT:QUEUE /OUT:"D:\\Dokument\\AI Course\\RoboVision\\build\\CMakeFiles\\CMakeScratch\\TryCompile-ymea3c\\Debug\\cmTC_f53a8.exe" /INCREMENTAL /ILK:"cmTC_f53a8.dir\\Debug\\cmTC_f53a8.ilk" /NOLOGO /LIBPATH:"D:\\tools\\vcpkg\\installed\\x64-windows\\debug\\lib" /LIBPATH:"D:\\tools\\vcpkg\\installed\\x64-windows\\debug\\lib\\manual-link" kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib "D:\\tools\\vcpkg\\installed\\x64-windows\\debug\\lib\\*.lib" /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"D:/Dokument/AI Course/RoboVision/build/CMakeFiles/CMakeScratch/TryCompile-ymea3c/Debug/cmTC_f53a8.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:/Dokument/AI Course/RoboVision/build/CMakeFiles/CMakeScratch/TryCompile-ymea3c/Debug/cmTC_f53a8.lib" /MACHINE:X64  /machine:x64 cmTC_f53a8.dir\\Debug\\CMakeCXXCompilerABI.obj
+          cmTC_f53a8.vcxproj -> D:\\Dokument\\AI Course\\RoboVision\\build\\CMakeFiles\\CMakeScratch\\TryCompile-ymea3c\\Debug\\cmTC_f53a8.exe
         AppLocalFromInstalled:
-          pwsh.exe -ExecutionPolicy Bypass -noprofile -File "D:\\tools\\vcpkg\\scripts\\buildsystems\\msbuild\\applocal.ps1" "D:\\Dokument\\AI Course\\RoboVision\\build\\CMakeFiles\\CMakeScratch\\TryCompile-tyd6tv\\Debug\\cmTC_5db74.exe" "D:\\tools\\vcpkg\\installed\\x64-windows\\debug\\bin" "cmTC_5db74.dir\\Debug\\cmTC_5db74.tlog\\cmTC_5db74.write.1u.tlog" "cmTC_5db74.dir\\Debug\\vcpkg.applocal.log"
+          pwsh.exe -ExecutionPolicy Bypass -noprofile -File "D:\\tools\\vcpkg\\scripts\\buildsystems\\msbuild\\applocal.ps1" "D:\\Dokument\\AI Course\\RoboVision\\build\\CMakeFiles\\CMakeScratch\\TryCompile-ymea3c\\Debug\\cmTC_f53a8.exe" "D:\\tools\\vcpkg\\installed\\x64-windows\\debug\\bin" "cmTC_f53a8.dir\\Debug\\cmTC_f53a8.tlog\\cmTC_f53a8.write.1u.tlog" "cmTC_f53a8.dir\\Debug\\vcpkg.applocal.log"
           'pwsh.exe' is not recognized as an internal or external command,
           operable program or batch file.
-          The command "pwsh.exe -ExecutionPolicy Bypass -noprofile -File "D:\\tools\\vcpkg\\scripts\\buildsystems\\msbuild\\applocal.ps1" "D:\\Dokument\\AI Course\\RoboVision\\build\\CMakeFiles\\CMakeScratch\\TryCompile-tyd6tv\\Debug\\cmTC_5db74.exe" "D:\\tools\\vcpkg\\installed\\x64-windows\\debug\\bin" "cmTC_5db74.dir\\Debug\\cmTC_5db74.tlog\\cmTC_5db74.write.1u.tlog" "cmTC_5db74.dir\\Debug\\vcpkg.applocal.log"" exited with code 9009.
-          "C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\powershell.exe" -ExecutionPolicy Bypass -noprofile -File "D:\\tools\\vcpkg\\scripts\\buildsystems\\msbuild\\applocal.ps1" "D:\\Dokument\\AI Course\\RoboVision\\build\\CMakeFiles\\CMakeScratch\\TryCompile-tyd6tv\\Debug\\cmTC_5db74.exe" "D:\\tools\\vcpkg\\installed\\x64-windows\\debug\\bin" "cmTC_5db74.dir\\Debug\\cmTC_5db74.tlog\\cmTC_5db74.write.1u.tlog" "cmTC_5db74.dir\\Debug\\vcpkg.applocal.log"
+          The command "pwsh.exe -ExecutionPolicy Bypass -noprofile -File "D:\\tools\\vcpkg\\scripts\\buildsystems\\msbuild\\applocal.ps1" "D:\\Dokument\\AI Course\\RoboVision\\build\\CMakeFiles\\CMakeScratch\\TryCompile-ymea3c\\Debug\\cmTC_f53a8.exe" "D:\\tools\\vcpkg\\installed\\x64-windows\\debug\\bin" "cmTC_f53a8.dir\\Debug\\cmTC_f53a8.tlog\\cmTC_f53a8.write.1u.tlog" "cmTC_f53a8.dir\\Debug\\vcpkg.applocal.log"" exited with code 9009.
+          "C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\powershell.exe" -ExecutionPolicy Bypass -noprofile -File "D:\\tools\\vcpkg\\scripts\\buildsystems\\msbuild\\applocal.ps1" "D:\\Dokument\\AI Course\\RoboVision\\build\\CMakeFiles\\CMakeScratch\\TryCompile-ymea3c\\Debug\\cmTC_f53a8.exe" "D:\\tools\\vcpkg\\installed\\x64-windows\\debug\\bin" "cmTC_f53a8.dir\\Debug\\cmTC_f53a8.tlog\\cmTC_f53a8.write.1u.tlog" "cmTC_f53a8.dir\\Debug\\vcpkg.applocal.log"
         FinalizeBuildStatus:
-          Deleting file "cmTC_5db74.dir\\Debug\\cmTC_5db74.tlog\\unsuccessfulbuild".
-          Touching "cmTC_5db74.dir\\Debug\\cmTC_5db74.tlog\\cmTC_5db74.lastbuildstate".
-        Done Building Project "D:\\Dokument\\AI Course\\RoboVision\\build\\CMakeFiles\\CMakeScratch\\TryCompile-tyd6tv\\cmTC_5db74.vcxproj" (default targets).
+          Deleting file "cmTC_f53a8.dir\\Debug\\cmTC_f53a8.tlog\\unsuccessfulbuild".
+          Touching "cmTC_f53a8.dir\\Debug\\cmTC_f53a8.tlog\\cmTC_f53a8.lastbuildstate".
+        Done Building Project "D:\\Dokument\\AI Course\\RoboVision\\build\\CMakeFiles\\CMakeScratch\\TryCompile-ymea3c\\cmTC_f53a8.vcxproj" (default targets).
         
         Build succeeded.
             0 Warning(s)
             0 Error(s)
         
-        Time Elapsed 00:00:01.32
+        Time Elapsed 00:00:02.37
         
       exitCode: 0
   -
