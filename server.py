@@ -9,6 +9,7 @@ Original file is located at
 
 # server.py
 import zmq
+import time
 import json
 import joblib
 import matplotlib.pyplot as plt
@@ -26,17 +27,24 @@ def predict_next(robot_id, x, y):
 # zeromq server
 context = zmq.Context()
 socket = context.socket(zmq.REP)
-socket.bind("tcp://*:5555")  # server listens on port 5555
-print("server is running...")
+socket.bind("tcp://10.132.172.76:5555")  # server listens on port 5555
+print("Server is running...")
+
+start_time = time.time()
 
 while True:
     try:
-        message = socket.recv_json()
-        robot_id = message['robot_id']
-        x = float(message['x'])
-        y = float(message['y'])
+        if time.time() - start_time > 120:
+            print("2 minutes have passed. Closing the server.")
+            break
 
-        print(f"received: {robot_id} at ({x}, {y})")
+        message = socket.recv_string()
+        parts = message.split()
+        robot_id = parts[0]
+        x = float(parts[1])
+        y = float(parts[2])
+
+        print(f"received message: {message}")
 
         prediction = predict_next(robot_id, x, y)
         response = {'next_x': prediction[0], 'next_y': prediction[1]}
@@ -44,3 +52,6 @@ while True:
         response = {'error': str(e)}
 
     socket.send_json(response)
+
+socket.close()
+context.term()
