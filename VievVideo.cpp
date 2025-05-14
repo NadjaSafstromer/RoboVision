@@ -3,17 +3,22 @@
 #include <opencv2/imgproc/imgproc.hpp>
 #include <iostream>
 #include <fstream>
+#include <zmq.hpp>
 #include "players.h"
+#include <string_view>
+
 int previous[4] = { 0 };
 int nextId = 1;
 using namespace std;
 using namespace cv;
+using namespace zmq;
+
 int purpleAmount[4] = { 0 };
 bool check = false;
 Scalar bluemin = Scalar(112, 103, 50);
 Scalar bluemax = Scalar(125, 255, 255);
 Scalar purplemin = Scalar(148, 94, 45);
-Scalar purplemax = Scalar(175.95, 255, 255);
+Scalar purplemax = Scalar(176, 255, 255);
 Scalar orangemin = Scalar(5, 150, 70);
 Scalar orangemax = Scalar(15, 255, 255);
 
@@ -22,6 +27,21 @@ vector <Point> purpleCenter;
 vector <Point> ballCenter;
 vector <Player> players;
 
+void sendData(const int numberOfPlayers) {
+    context_t ctx;
+    socket_t sock(ctx, socket_type::req);
+    sock.connect("tcp://10.132.174.117:5555");
+    stringstream messageData;
+    for (size_t i = 0; i < blueCenter.size() && i < 4; ++i) {
+        float x = blueCenter[i].x;
+        float y = blueCenter[i].y;
+        messageData << "agent_blue_" << purpleAmount[i] << " " << -0.5 + x / 1000 << " " << 0.8 - y / 1000 << "\n";
+       
+    }
+    string finalMessage = messageData.str() + "\n";
+    sock.send(buffer(finalMessage), send_flags::none);
+    cout << "Sent message:" << finalMessage << endl;
+}
 void locatePlayer(Mat img, Scalar low, Scalar high, Color color) {
     Mat mask;
     Mat purpleMask, orangeMask;
@@ -64,14 +84,14 @@ void playerId(Mat img) {
     ofstream Positions("C:\\Users\\jbnlu\\Desktop\\positions.txt", ios::app);
     if (!Positions.is_open()) {
         cerr << "Failed to open file for writing." << endl;
-        return; // Return early if file can't be opened
+        return; // return early if file can't be opened
     }
     if (check == false) {
         for (size_t i = 0; i < blueCenter.size() && i < 4; ++i) {
             for (size_t j = 0; j < purpleCenter.size(); ++j) {
                 double dist = norm(blueCenter[i] - purpleCenter[j]);
                 if (dist < 25 && purpleAmount[i] == 0) {
-                    // Assign unique ID
+                    // assign unique ID
 
                     purpleAmount[i] = nextId;
                     nextId++;
@@ -86,7 +106,7 @@ void playerId(Mat img) {
         for (size_t i = 0; i < blueCenter.size() && i < 4; ++i) {
             float x = blueCenter[i].x;
             float y = blueCenter[i].y;
-            Positions << purpleAmount[i] << "," << -0.5 + x/1000 << "," << 0.8 - y/1000 << endl;
+            Positions << "agent_blue_" << purpleAmount[i] << " " << -0.5 + x / 1000 << " " << 0.8 - y / 1000 << endl;
         }
         Positions.close();
     }
@@ -94,7 +114,6 @@ void playerId(Mat img) {
 
 
 //Drawing the bounding boxes for every player for visual clarifaction
-//Note that this will later be repurposed for trail creation
 void drawPlayer(Mat img) {
     for (size_t i = 0; i < blueCenter.size(); ++i) {
         circle(img, blueCenter[i], 25, CV_RGB(255, 255, 255), 2);
@@ -107,7 +126,6 @@ void drawPlayer(Mat img) {
 
 
 int main() {
-    //clear the file if previously written in
     ofstream clearFile("C:\\Users\\jbnlu\\Desktop\\positions.txt");
     clearFile.close();
     //load the video file
@@ -144,11 +162,13 @@ int main() {
         locatePlayer(frame, orangemin, orangemax, Color::Orange);
         playerId(frame);
         drawPlayer(copy);
+        sendData(4);
         blueCenter.clear();
         purpleCenter.clear();
         //writes vieo file to earlier specified location.
         video.write(copy);
-        // Display the resulting video
+        // display the resulting video
+
         imshow("Check", copy);
         // Press  ESC on keyboard to  exit
         char c = (char)waitKey(1);
@@ -156,11 +176,11 @@ int main() {
             break;
     }
 
-    // When everything done, release the video capture and write object
+    //wWhen everything done, release the video capture and write object
     cap.release();
     video.release();
 
-    // Closes all the frames
+    // closes all the frames
     destroyAllWindows();
     return 0;
 }
