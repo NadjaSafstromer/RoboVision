@@ -40,11 +40,11 @@ void sendData(const int numberOfPlayers) {
     const float threshold = 0.05f;
 
     for (size_t i = 0; i < blueCenter.size() && i < 4; ++i) {
-        float x = blueCenter[i].x;
-        float y = blueCenter[i].y;
+        float norm_x = -0.5f + blueCenter[i].x / 1000.0f;
+        float norm_y = 0.8f - blueCenter[i].y / 1000.0f;
 
         stringstream messageData;
-        messageData << "agent_blue_" << purpleAmount[i] << " " << -0.5 + x / 1000 << " " << 0.8 - y / 1000 << "\n";
+        messageData << "agent_blue_" << purpleAmount[i] << " " << norm_x << " " << norm_y << "\n";
 
         // send
         sock.send(buffer(messageData.str()), send_flags::none);
