@@ -1,4 +1,4 @@
-#include <stdio.h>
+﻿#include <stdio.h>
 #include <opencv2/opencv.hpp>
 #include <opencv2/imgproc/imgproc.hpp>
 #include <iostream>
@@ -27,20 +27,64 @@ vector <Point> purpleCenter;
 vector <Point> ballCenter;
 vector <Player> players;
 
+/*sendData: communicates with the server to continously send each robot's coordinates frame by frame. recieves back the prediction
+response. Uses the response to compare predicted value to true value and calculate accuracy*/
 void sendData(const int numberOfPlayers) {
     context_t ctx;
     socket_t sock(ctx, socket_type::req);
     sock.connect("tcp://10.132.174.117:5555");
-    stringstream messageData;
+
+    static map<string, Point2f> previousPositions;
+    static int totalPredictions = 0;
+    static int correctPredictions = 0;
+    const float threshold = 0.05f;
+
     for (size_t i = 0; i < blueCenter.size() && i < 4; ++i) {
         float x = blueCenter[i].x;
         float y = blueCenter[i].y;
+
+        stringstream messageData;
         messageData << "agent_blue_" << purpleAmount[i] << " " << -0.5 + x / 1000 << " " << 0.8 - y / 1000 << "\n";
-       
-    }
-    string finalMessage = messageData.str() + "\n";
-    sock.send(buffer(finalMessage), send_flags::none);
-    cout << "Sent message:" << finalMessage << endl;
+
+        // send
+        sock.send(buffer(messageData.str()), send_flags::none);
+        cout << "Sent message:" << messageData.str() << endl;
+
+        // recieve
+        zmq::message_t reply;
+        sock.recv(reply, zmq::recv_flags::none);
+        string replyStr(static_cast<char*>(reply.data()), reply.size());
+
+        float pred_x, pred_y;
+        if (sscanf(replyStr.c_str(), "{\"next_x\":%f,\"next_y\":%f}", &pred_x, &pred_y) == 2) {
+            cout << "Prediction for " << robot_id << ": (" << pred_x << ", " << pred_y << ")" << endl;
+
+            // check against the last recorded true position (i.e. current frame becomes "next" in next loop)
+            // if there is no known past position (we're on frame one) then we skip the error calculation and initalize it below
+            if (previousPositions.count(robot_id)) {
+                float true_x = norm_x;
+                float true_y = norm_y;
+
+                float dx = pred_x - true_x;
+                float dy = pred_y - true_y;
+                float dist = sqrt(dx * dx + dy * dy);
+
+                cout << "Actual: (" << true_x << ", " << true_y << ") → Error: " << dist << endl;
+
+                ++totalPredictions;
+                if (dist <= threshold) ++correctPredictions;
+
+                float accuracy = 100.0f * correctPredictions / totalPredictions;
+                cout << "Current accuracy: " << accuracy << "%\n" << endl;
+            }
+
+            // update latest known position
+            previousPositions[robot_id] = Point2f(norm_x, norm_y);
+        }
+        else {
+            cerr << "Failed to parse prediction: " << replyStr << endl;
+        }
+    }    
 }
 void locatePlayer(Mat img, Scalar low, Scalar high, Color color) {
     Mat mask;
