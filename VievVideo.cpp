@@ -1,19 +1,24 @@
-#include <stdio.h>
+﻿#include <stdio.h>
 #include <opencv2/opencv.hpp>
 #include <opencv2/imgproc/imgproc.hpp>
 #include <iostream>
 #include <fstream>
+#include <zmq.hpp>
 #include "players.h"
+#include <string_view>
+
 int previous[4] = { 0 };
 int nextId = 1;
 using namespace std;
 using namespace cv;
+using namespace zmq;
+
 int purpleAmount[4] = { 0 };
 bool check = false;
 Scalar bluemin = Scalar(112, 103, 50);
 Scalar bluemax = Scalar(125, 255, 255);
 Scalar purplemin = Scalar(148, 94, 45);
-Scalar purplemax = Scalar(175.95, 255, 255);
+Scalar purplemax = Scalar(176, 255, 255);
 Scalar orangemin = Scalar(5, 150, 70);
 Scalar orangemax = Scalar(15, 255, 255);
 
@@ -22,6 +27,65 @@ vector <Point> purpleCenter;
 vector <Point> ballCenter;
 vector <Player> players;
 
+/*sendData: communicates with the server to continously send each robot's coordinates frame by frame. recieves back the prediction
+response. Uses the response to compare predicted value to true value and calculate accuracy*/
+void sendData(const int numberOfPlayers) {
+    context_t ctx;
+    socket_t sock(ctx, socket_type::req);
+    sock.connect("tcp://10.132.174.117:5555");
+
+    static map<string, Point2f> previousPositions;
+    static int totalPredictions = 0;
+    static int correctPredictions = 0;
+    const float threshold = 0.05f;
+
+    for (size_t i = 0; i < blueCenter.size() && i < 4; ++i) {
+        float x = blueCenter[i].x;
+        float y = blueCenter[i].y;
+
+        stringstream messageData;
+        messageData << "agent_blue_" << purpleAmount[i] << " " << -0.5 + x / 1000 << " " << 0.8 - y / 1000 << "\n";
+
+        // send
+        sock.send(buffer(messageData.str()), send_flags::none);
+        cout << "Sent message:" << messageData.str() << endl;
+
+        // recieve
+        zmq::message_t reply;
+        sock.recv(reply, zmq::recv_flags::none);
+        string replyStr(static_cast<char*>(reply.data()), reply.size());
+
+        float pred_x, pred_y;
+        if (sscanf(replyStr.c_str(), "{\"next_x\":%f,\"next_y\":%f}", &pred_x, &pred_y) == 2) {
+            cout << "Prediction for " << robot_id << ": (" << pred_x << ", " << pred_y << ")" << endl;
+
+            // check against the last recorded true position (i.e. current frame becomes "next" in next loop)
+            // if there is no known past position (we're on frame one) then we skip the error calculation and initalize it below
+            if (previousPositions.count(robot_id)) {
+                float true_x = norm_x;
+                float true_y = norm_y;
+
+                float dx = pred_x - true_x;
+                float dy = pred_y - true_y;
+                float dist = sqrt(dx * dx + dy * dy);
+
+                cout << "Actual: (" << true_x << ", " << true_y << ") → Error: " << dist << endl;
+
+                ++totalPredictions;
+                if (dist <= threshold) ++correctPredictions;
+
+                float accuracy = 100.0f * correctPredictions / totalPredictions;
+                cout << "Current accuracy: " << accuracy << "%\n" << endl;
+            }
+
+            // update latest known position
+            previousPositions[robot_id] = Point2f(norm_x, norm_y);
+        }
+        else {
+            cerr << "Failed to parse prediction: " << replyStr << endl;
+        }
+    }    
+}
 void locatePlayer(Mat img, Scalar low, Scalar high, Color color) {
     Mat mask;
     Mat purpleMask, orangeMask;
@@ -64,14 +128,14 @@ void playerId(Mat img) {
     ofstream Positions("C:\\Users\\jbnlu\\Desktop\\positions.txt", ios::app);
     if (!Positions.is_open()) {
         cerr << "Failed to open file for writing." << endl;
-        return; // Return early if file can't be opened
+        return; // return early if file can't be opened
     }
     if (check == false) {
         for (size_t i = 0; i < blueCenter.size() && i < 4; ++i) {
             for (size_t j = 0; j < purpleCenter.size(); ++j) {
                 double dist = norm(blueCenter[i] - purpleCenter[j]);
                 if (dist < 25 && purpleAmount[i] == 0) {
-                    // Assign unique ID
+                    // assign unique ID
 
                     purpleAmount[i] = nextId;
                     nextId++;
@@ -86,7 +150,7 @@ void playerId(Mat img) {
         for (size_t i = 0; i < blueCenter.size() && i < 4; ++i) {
             float x = blueCenter[i].x;
             float y = blueCenter[i].y;
-            Positions << purpleAmount[i] << "," << -0.5 + x/1000 << "," << 0.8 - y/1000 << endl;
+            Positions << "agent_blue_" << purpleAmount[i] << " " << -0.5 + x / 1000 << " " << 0.8 - y / 1000 << endl;
         }
         Positions.close();
     }
@@ -94,7 +158,6 @@ void playerId(Mat img) {
 
 
 //Drawing the bounding boxes for every player for visual clarifaction
-//Note that this will later be repurposed for trail creation
 void drawPlayer(Mat img) {
     for (size_t i = 0; i < blueCenter.size(); ++i) {
         circle(img, blueCenter[i], 25, CV_RGB(255, 255, 255), 2);
@@ -107,7 +170,6 @@ void drawPlayer(Mat img) {
 
 
 int main() {
-    //clear the file if previously written in
     ofstream clearFile("C:\\Users\\jbnlu\\Desktop\\positions.txt");
     clearFile.close();
     //load the video file
@@ -144,11 +206,13 @@ int main() {
         locatePlayer(frame, orangemin, orangemax, Color::Orange);
         playerId(frame);
         drawPlayer(copy);
+        sendData(4);
         blueCenter.clear();
         purpleCenter.clear();
         //writes vieo file to earlier specified location.
         video.write(copy);
-        // Display the resulting video
+        // display the resulting video
+
         imshow("Check", copy);
         // Press  ESC on keyboard to  exit
         char c = (char)waitKey(1);
@@ -156,11 +220,11 @@ int main() {
             break;
     }
 
-    // When everything done, release the video capture and write object
+    //wWhen everything done, release the video capture and write object
     cap.release();
     video.release();
 
-    // Closes all the frames
+    // closes all the frames
     destroyAllWindows();
     return 0;
 }
