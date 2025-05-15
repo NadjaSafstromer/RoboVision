@@ -34,7 +34,7 @@ void sendData(const int numberOfPlayers) {
     socket_t sock(ctx, socket_type::req);
     sock.connect("tcp://10.132.174.117:5555");
 
-    static map<string, Point2f> previousPositions;
+    static map<string, Point2f> lastPrediction;
     static int totalPredictions = 0;
     static int correctPredictions = 0;
     const float threshold = 0.05f;
@@ -43,10 +43,30 @@ void sendData(const int numberOfPlayers) {
         float norm_x = -0.5f + blueCenter[i].x / 1000.0f;
         float norm_y = 0.8f - blueCenter[i].y / 1000.0f;
 
-        stringstream messageData;
-        messageData << "agent_blue_" << purpleAmount[i] << " " << norm_x << " " << norm_y << "\n";
+        // check for last prediction, if it exists
+        if (lastPrediction.count(robot_id)) {
+            Point2f predictedPos = lastPrediction[robot_id];
+
+            float dx = norm_x - predictedPos.x;
+            float dy = norm_y - predictedPos.y;
+            float error = sqrt(dx * dx + dy * dy);
+
+            cout << "[VALIDATION] " << robot_id
+                << " | Predicted: (" << predictedPos.x << ", " << predictedPos.y << ")"
+                << " | Actual: (" << norm_x << ", " << norm_y << ")"
+                << " | Error: " << error << endl;
+
+            totalPredictions++;
+            if (error <= threshold)
+                correctPredictions++;
+
+            float accuracy = 100.0f * correctPredictions / totalPredictions;
+            cout << "Current accuracy: " << accuracy << "%\n";
+        }
 
         // send
+        stringstream messageData;
+        messageData << "agent_blue_" << purpleAmount[i] << " " << norm_x << " " << norm_y << "\n";
         sock.send(buffer(messageData.str()), send_flags::none);
         cout << "Sent message:" << messageData.str() << endl;
 
@@ -57,33 +77,12 @@ void sendData(const int numberOfPlayers) {
 
         float pred_x, pred_y;
         if (sscanf(replyStr.c_str(), "{\"next_x\":%f,\"next_y\":%f}", &pred_x, &pred_y) == 2) {
-            cout << "Prediction for " << robot_id << ": (" << pred_x << ", " << pred_y << ")" << endl;
-
-            // check against the last recorded true position (i.e. current frame becomes "next" in next loop)
-            // if there is no known past position (we're on frame one) then we skip the error calculation and initalize it below
-            if (previousPositions.count(robot_id)) {
-                float true_x = norm_x;
-                float true_y = norm_y;
-
-                float dx = pred_x - true_x;
-                float dy = pred_y - true_y;
-                float dist = sqrt(dx * dx + dy * dy);
-
-                cout << "Actual: (" << true_x << ", " << true_y << ") → Error: " << dist << endl;
-
-                ++totalPredictions;
-                if (dist <= threshold) ++correctPredictions;
-
-                float accuracy = 100.0f * correctPredictions / totalPredictions;
-                cout << "Current accuracy: " << accuracy << "%\n" << endl;
-            }
-
-            // update latest known position
-            previousPositions[robot_id] = Point2f(norm_x, norm_y);
+            lastPrediction[robot_id] = Point2f(pred_x, pred_y);  // save prediction to compare it w the next frame
         }
         else {
-            cerr << "Failed to parse prediction: " << replyStr << endl;
+            cerr << "failure :( "
         }
+        
     }    
 }
 void locatePlayer(Mat img, Scalar low, Scalar high, Color color) {
