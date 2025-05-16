@@ -1,4 +1,4 @@
-#include <stdio.h>
+﻿#include <stdio.h>
 #include <opencv2/opencv.hpp>
 #include <opencv2/imgproc/imgproc.hpp>
 #include <iostream>
@@ -38,18 +38,46 @@ void sendData(const int numberOfPlayers) {
     socket_t sock(ctx, socket_type::req);
     sock.connect("tcp://127.0.0.1:5555");
 
-    json all_data = json::array();  // JSON-array
+    json all_data = json::array();
+
+    static std::map<std::string, Point2f> lastPrediction;
+    static int totalPredictions = 0;
+    static int correctPredictions = 0;
+    const float threshold = 0.05f;
 
     for (size_t i = 0; i < blueCenter.size() && i < 4; ++i) {
-        float x = -0.5f + blueCenter[i].x / 1000.0f;
-        float y =  0.8f - blueCenter[i].y / 1000.0f;
+        float norm_x = -0.5f + blueCenter[i].x / 1000.0f;
+        float norm_y =  0.8f - blueCenter[i].y / 1000.0f;
 
+        std::string robot_id = "agent_blue_" + std::to_string(yellowAmount[i]);
+
+        // Validera prediktion
+        if (lastPrediction.count(robot_id)) {
+            Point2f predictedPos = lastPrediction[robot_id];
+            float dx = norm_x - predictedPos.x;
+            float dy = norm_y - predictedPos.y;
+            float error = std::sqrt(dx * dx + dy * dy);
+
+            std::cout << "[VALIDATION] " << robot_id
+                      << " | Predicted: (" << predictedPos.x << ", " << predictedPos.y << ")"
+                      << " | Actual: (" << norm_x << ", " << norm_y << ")"
+                      << " | Error: " << error << std::endl;
+
+            totalPredictions++;
+            if (error <= threshold)
+                correctPredictions++;
+
+            float accuracy = 100.0f * correctPredictions / totalPredictions;
+            std::cout << "Current accuracy: " << accuracy << "%\n";
+        }
+
+        // Lägg till i JSON
         json data;
         data["id"] = yellowAmount[i];
-        data["x"] = x;
-        data["y"] = y;
+        data["x"] = norm_x;
+        data["y"] = norm_y;
 
-        all_data.push_back(data);  // lägg till varje robot i arrayen
+        all_data.push_back(data);
     }
 
     std::string payload = all_data.dump();
@@ -59,7 +87,21 @@ void sendData(const int numberOfPlayers) {
     sock.recv(reply);
     std::string reply_str(static_cast<char*>(reply.data()), reply.size());
     std::cout << "Server replied: " << reply_str << std::endl;
+
+    // Försök tolka svaret och uppdatera prediktioner
+    try {
+        json prediction_array = json::parse(reply_str);
+        for (const auto& pred : prediction_array) {
+            std::string id = "agent_blue_" + std::to_string(pred["id"].get<int>());
+            float pred_x = pred["next_x"].get<float>();
+            float pred_y = pred["next_y"].get<float>();
+            lastPrediction[id] = Point2f(pred_x, pred_y);
+        }
+    } catch (const std::exception& e) {
+        std::cerr << "Failed to parse prediction reply: " << e.what() << std::endl;
+    }
 }
+
 
 void locatePlayer(Mat img, Scalar low, Scalar high, Color color) {
     Mat mask;
@@ -180,13 +222,13 @@ void drawPlayer(Mat img) {
         circle(img, blueCenter[i], 25, CV_RGB(255, 0, 0), 2);
     }
 
-    bool blinkOn = (frameCounter % 20) < 10;  // blink function in order to distinguish our team;
+    /*bool blinkOn = (frameCounter % 20) < 10;  // blink function in order to distinguish our team;
 
     if (blinkOn) {
         for (size_t i = 0; i < yellowCenter.size(); ++i) {
             circle(img, yellowCenter[i], 25, CV_RGB(255, 255, 255), 2);
         }
-    }
+    }*/
 
     if (!ballCenter.empty()) {
         circle(img, ballCenter[0], 10, CV_RGB(255, 255, 255), 2);
