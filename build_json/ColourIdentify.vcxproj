@@ -1,0 +1,406 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <PreferredToolArchitecture>x64</PreferredToolArchitecture>
+  </PropertyGroup>
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="MinSizeRel|x64">
+      <Configuration>MinSizeRel</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="RelWithDebInfo|x64">
+      <Configuration>RelWithDebInfo</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{F257FB9F-5962-3D4C-8161-0FF1C5CA4AEF}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <VcpkgEnabled>false</VcpkgEnabled>
+    <WindowsTargetPlatformVersion>10.0.22621.0</WindowsTargetPlatformVersion>
+    <Platform>x64</Platform>
+    <ProjectName>ColourIdentify</ProjectName>
+    <VCProjectUpgraderObjectName>NoUpgrade</VCProjectUpgraderObjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets">
+    <Import Project="do_not_import_user.props" Condition="exists('do_not_import_user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.20506.1</_ProjectFileVersion>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:\Dokument\AI Course\RoboVision\build_json\Debug\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">ColourIdentify.dir\Debug\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">ColourIdentify</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.exe</TargetExt>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</GenerateManifest>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:\Dokument\AI Course\RoboVision\build_json\Release\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">ColourIdentify.dir\Release\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">ColourIdentify</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.exe</TargetExt>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</GenerateManifest>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">D:\Dokument\AI Course\RoboVision\build_json\MinSizeRel\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">ColourIdentify.dir\MinSizeRel\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">ColourIdentify</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">.exe</TargetExt>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">true</GenerateManifest>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">D:\Dokument\AI Course\RoboVision\build_json\RelWithDebInfo\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">ColourIdentify.dir\RelWithDebInfo\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">ColourIdentify</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">.exe</TargetExt>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">true</LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">true</GenerateManifest>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>D:\Dokument\AI Course\RoboVision\include;D:\tools\vcpkg\installed\x64-windows\include;D:\tools\libzmq_mingw\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /external:I "D:/tools/opencv/build/include"</AdditionalOptions>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <ExternalWarningLevel>TurnOffAllWarnings</ExternalWarningLevel>
+      <InlineFunctionExpansion>Disabled</InlineFunctionExpansion>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <MinimalRebuild></MinimalRebuild>
+      <Optimization>Disabled</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <SupportJustMyCode></SupportJustMyCode>
+      <UseFullPaths>false</UseFullPaths>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;CMAKE_INTDIR="Debug"</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ScanSourceForModuleDependencies>false</ScanSourceForModuleDependencies>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_DEBUG;_WINDOWS;CMAKE_INTDIR=\"Debug\"</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>D:\Dokument\AI Course\RoboVision\include;D:\tools\vcpkg\installed\x64-windows\include;D:\tools\libzmq_mingw\include;D:\tools\opencv\build\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>D:\Dokument\AI Course\RoboVision\include;D:\tools\vcpkg\installed\x64-windows\include;D:\tools\libzmq_mingw\include;D:\tools\opencv\build\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <PostBuildEvent>
+      <Message></Message>
+      <Command>setlocal
+C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -noprofile -executionpolicy Bypass -file D:/tools/vcpkg/scripts/buildsystems/msbuild/applocal.ps1 -targetBinary "D:/Dokument/AI Course/RoboVision/build_json/Debug/ColourIdentify.exe" -installedDir D:/tools/vcpkg/installed/x64-windows/debug/bin -OutVariable out
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+    </PostBuildEvent>
+    <Link>
+      <AdditionalDependencies>D:\tools\opencv\build\x64\vc16\lib\opencv_world4110d.lib;D:\tools\opencv\build\x64\vc16\lib\opencv_world4110d.lib;D:\tools\opencv\build\x64\vc16\lib\opencv_world4110d.lib;D:\tools\opencv\build\x64\vc16\lib\opencv_world4110d.lib;D:\tools\opencv\build\x64\vc16\lib\opencv_world4110d.lib;D:\tools\opencv\build\x64\vc16\lib\opencv_world4110d.lib;D:\tools\opencv\build\x64\vc16\lib\opencv_world4110d.lib;D:\tools\opencv\build\x64\vc16\lib\opencv_world4110d.lib;D:\tools\opencv\build\x64\vc16\lib\opencv_world4110d.lib;D:\tools\opencv\build\x64\vc16\lib\opencv_world4110d.lib;D:\tools\opencv\build\x64\vc16\lib\opencv_world4110d.lib;D:\tools\opencv\build\x64\vc16\lib\opencv_world4110d.lib;D:\tools\opencv\build\x64\vc16\lib\opencv_world4110d.lib;D:\tools\opencv\build\x64\vc16\lib\opencv_world4110d.lib;D:\tools\opencv\build\x64\vc16\lib\opencv_world4110d.lib;D:\tools\opencv\build\x64\vc16\lib\opencv_world4110d.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>D:/tools/libzmq_msvc_build/lib/Release;D:/tools/libzmq_msvc_build/lib/Release/$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ImportLibrary>D:/Dokument/AI Course/RoboVision/build_json/Debug/ColourIdentify.lib</ImportLibrary>
+      <ProgramDataBaseFile>D:/Dokument/AI Course/RoboVision/build_json/Debug/ColourIdentify.pdb</ProgramDataBaseFile>
+      <SubSystem>Console</SubSystem>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>D:\Dokument\AI Course\RoboVision\include;D:\tools\vcpkg\installed\x64-windows\include;D:\tools\libzmq_mingw\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /external:I "D:/tools/opencv/build/include"</AdditionalOptions>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <ExternalWarningLevel>TurnOffAllWarnings</ExternalWarningLevel>
+      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <MinimalRebuild></MinimalRebuild>
+      <Optimization>MaxSpeed</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <SupportJustMyCode></SupportJustMyCode>
+      <UseFullPaths>false</UseFullPaths>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;CMAKE_INTDIR="Release"</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <DebugInformationFormat>
+      </DebugInformationFormat>
+      <ScanSourceForModuleDependencies>false</ScanSourceForModuleDependencies>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;CMAKE_INTDIR=\"Release\"</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>D:\Dokument\AI Course\RoboVision\include;D:\tools\vcpkg\installed\x64-windows\include;D:\tools\libzmq_mingw\include;D:\tools\opencv\build\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>D:\Dokument\AI Course\RoboVision\include;D:\tools\vcpkg\installed\x64-windows\include;D:\tools\libzmq_mingw\include;D:\tools\opencv\build\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <PostBuildEvent>
+      <Message></Message>
+      <Command>setlocal
+C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -noprofile -executionpolicy Bypass -file D:/tools/vcpkg/scripts/buildsystems/msbuild/applocal.ps1 -targetBinary "D:/Dokument/AI Course/RoboVision/build_json/Release/ColourIdentify.exe" -installedDir D:/tools/vcpkg/installed/x64-windows/bin -OutVariable out
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+    </PostBuildEvent>
+    <Link>
+      <AdditionalDependencies>D:\tools\opencv\build\x64\vc16\lib\opencv_world4110.lib;D:\tools\opencv\build\x64\vc16\lib\opencv_world4110.lib;D:\tools\opencv\build\x64\vc16\lib\opencv_world4110.lib;D:\tools\opencv\build\x64\vc16\lib\opencv_world4110.lib;D:\tools\opencv\build\x64\vc16\lib\opencv_world4110.lib;D:\tools\opencv\build\x64\vc16\lib\opencv_world4110.lib;D:\tools\opencv\build\x64\vc16\lib\opencv_world4110.lib;D:\tools\opencv\build\x64\vc16\lib\opencv_world4110.lib;D:\tools\opencv\build\x64\vc16\lib\opencv_world4110.lib;D:\tools\opencv\build\x64\vc16\lib\opencv_world4110.lib;D:\tools\opencv\build\x64\vc16\lib\opencv_world4110.lib;D:\tools\opencv\build\x64\vc16\lib\opencv_world4110.lib;D:\tools\opencv\build\x64\vc16\lib\opencv_world4110.lib;D:\tools\opencv\build\x64\vc16\lib\opencv_world4110.lib;D:\tools\opencv\build\x64\vc16\lib\opencv_world4110.lib;D:\tools\opencv\build\x64\vc16\lib\opencv_world4110.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>D:/tools/libzmq_msvc_build/lib/Release;D:/tools/libzmq_msvc_build/lib/Release/$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ImportLibrary>D:/Dokument/AI Course/RoboVision/build_json/Release/ColourIdentify.lib</ImportLibrary>
+      <ProgramDataBaseFile>D:/Dokument/AI Course/RoboVision/build_json/Release/ColourIdentify.pdb</ProgramDataBaseFile>
+      <SubSystem>Console</SubSystem>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>D:\Dokument\AI Course\RoboVision\include;D:\tools\vcpkg\installed\x64-windows\include;D:\tools\libzmq_mingw\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /external:I "D:/tools/opencv/build/include"</AdditionalOptions>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <ExternalWarningLevel>TurnOffAllWarnings</ExternalWarningLevel>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <MinimalRebuild></MinimalRebuild>
+      <Optimization>MinSpace</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <SupportJustMyCode></SupportJustMyCode>
+      <UseFullPaths>false</UseFullPaths>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;CMAKE_INTDIR="MinSizeRel"</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <DebugInformationFormat>
+      </DebugInformationFormat>
+      <ScanSourceForModuleDependencies>false</ScanSourceForModuleDependencies>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;CMAKE_INTDIR=\"MinSizeRel\"</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>D:\Dokument\AI Course\RoboVision\include;D:\tools\vcpkg\installed\x64-windows\include;D:\tools\libzmq_mingw\include;D:\tools\opencv\build\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>D:\Dokument\AI Course\RoboVision\include;D:\tools\vcpkg\installed\x64-windows\include;D:\tools\libzmq_mingw\include;D:\tools\opencv\build\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <PostBuildEvent>
+      <Message></Message>
+      <Command>setlocal
+C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -noprofile -executionpolicy Bypass -file D:/tools/vcpkg/scripts/buildsystems/msbuild/applocal.ps1 -targetBinary "D:/Dokument/AI Course/RoboVision/build_json/MinSizeRel/ColourIdentify.exe" -installedDir D:/tools/vcpkg/installed/x64-windows/bin -OutVariable out
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+    </PostBuildEvent>
+    <Link>
+      <AdditionalDependencies>D:\tools\opencv\build\x64\vc16\lib\opencv_world4110.lib;D:\tools\opencv\build\x64\vc16\lib\opencv_world4110.lib;D:\tools\opencv\build\x64\vc16\lib\opencv_world4110.lib;D:\tools\opencv\build\x64\vc16\lib\opencv_world4110.lib;D:\tools\opencv\build\x64\vc16\lib\opencv_world4110.lib;D:\tools\opencv\build\x64\vc16\lib\opencv_world4110.lib;D:\tools\opencv\build\x64\vc16\lib\opencv_world4110.lib;D:\tools\opencv\build\x64\vc16\lib\opencv_world4110.lib;D:\tools\opencv\build\x64\vc16\lib\opencv_world4110.lib;D:\tools\opencv\build\x64\vc16\lib\opencv_world4110.lib;D:\tools\opencv\build\x64\vc16\lib\opencv_world4110.lib;D:\tools\opencv\build\x64\vc16\lib\opencv_world4110.lib;D:\tools\opencv\build\x64\vc16\lib\opencv_world4110.lib;D:\tools\opencv\build\x64\vc16\lib\opencv_world4110.lib;D:\tools\opencv\build\x64\vc16\lib\opencv_world4110.lib;D:\tools\opencv\build\x64\vc16\lib\opencv_world4110.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>D:/tools/libzmq_msvc_build/lib/Release;D:/tools/libzmq_msvc_build/lib/Release/$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ImportLibrary>D:/Dokument/AI Course/RoboVision/build_json/MinSizeRel/ColourIdentify.lib</ImportLibrary>
+      <ProgramDataBaseFile>D:/Dokument/AI Course/RoboVision/build_json/MinSizeRel/ColourIdentify.pdb</ProgramDataBaseFile>
+      <SubSystem>Console</SubSystem>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>D:\Dokument\AI Course\RoboVision\include;D:\tools\vcpkg\installed\x64-windows\include;D:\tools\libzmq_mingw\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /external:I "D:/tools/opencv/build/include"</AdditionalOptions>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <ExternalWarningLevel>TurnOffAllWarnings</ExternalWarningLevel>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <MinimalRebuild></MinimalRebuild>
+      <Optimization>MaxSpeed</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <SupportJustMyCode></SupportJustMyCode>
+      <UseFullPaths>false</UseFullPaths>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;CMAKE_INTDIR="RelWithDebInfo"</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ScanSourceForModuleDependencies>false</ScanSourceForModuleDependencies>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;CMAKE_INTDIR=\"RelWithDebInfo\"</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>D:\Dokument\AI Course\RoboVision\include;D:\tools\vcpkg\installed\x64-windows\include;D:\tools\libzmq_mingw\include;D:\tools\opencv\build\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>D:\Dokument\AI Course\RoboVision\include;D:\tools\vcpkg\installed\x64-windows\include;D:\tools\libzmq_mingw\include;D:\tools\opencv\build\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <PostBuildEvent>
+      <Message></Message>
+      <Command>setlocal
+C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -noprofile -executionpolicy Bypass -file D:/tools/vcpkg/scripts/buildsystems/msbuild/applocal.ps1 -targetBinary "D:/Dokument/AI Course/RoboVision/build_json/RelWithDebInfo/ColourIdentify.exe" -installedDir D:/tools/vcpkg/installed/x64-windows/bin -OutVariable out
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+    </PostBuildEvent>
+    <Link>
+      <AdditionalDependencies>D:\tools\opencv\build\x64\vc16\lib\opencv_world4110.lib;D:\tools\opencv\build\x64\vc16\lib\opencv_world4110.lib;D:\tools\opencv\build\x64\vc16\lib\opencv_world4110.lib;D:\tools\opencv\build\x64\vc16\lib\opencv_world4110.lib;D:\tools\opencv\build\x64\vc16\lib\opencv_world4110.lib;D:\tools\opencv\build\x64\vc16\lib\opencv_world4110.lib;D:\tools\opencv\build\x64\vc16\lib\opencv_world4110.lib;D:\tools\opencv\build\x64\vc16\lib\opencv_world4110.lib;D:\tools\opencv\build\x64\vc16\lib\opencv_world4110.lib;D:\tools\opencv\build\x64\vc16\lib\opencv_world4110.lib;D:\tools\opencv\build\x64\vc16\lib\opencv_world4110.lib;D:\tools\opencv\build\x64\vc16\lib\opencv_world4110.lib;D:\tools\opencv\build\x64\vc16\lib\opencv_world4110.lib;D:\tools\opencv\build\x64\vc16\lib\opencv_world4110.lib;D:\tools\opencv\build\x64\vc16\lib\opencv_world4110.lib;D:\tools\opencv\build\x64\vc16\lib\opencv_world4110.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>D:/tools/libzmq_msvc_build/lib/Release;D:/tools/libzmq_msvc_build/lib/Release/$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ImportLibrary>D:/Dokument/AI Course/RoboVision/build_json/RelWithDebInfo/ColourIdentify.lib</ImportLibrary>
+      <ProgramDataBaseFile>D:/Dokument/AI Course/RoboVision/build_json/RelWithDebInfo/ColourIdentify.pdb</ProgramDataBaseFile>
+      <SubSystem>Console</SubSystem>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <CustomBuild Include="D:\Dokument\AI Course\RoboVision\CMakeLists.txt">
+      <UseUtf8Encoding>Always</UseUtf8Encoding>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Building Custom Rule D:/Dokument/AI Course/RoboVision/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
+"D:\Program Files\bin\cmake.exe" "-SD:/Dokument/AI Course/RoboVision" "-BD:/Dokument/AI Course/RoboVision/build_json" --check-stamp-file "D:/Dokument/AI Course/RoboVision/build_json/CMakeFiles/generate.stamp"
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:\Dokument\AI Course\RoboVision\build_json\CMakeFiles\4.0.1\CMakeCCompiler.cmake;D:\Dokument\AI Course\RoboVision\build_json\CMakeFiles\4.0.1\CMakeCXXCompiler.cmake;D:\Dokument\AI Course\RoboVision\build_json\CMakeFiles\4.0.1\CMakeRCCompiler.cmake;D:\Dokument\AI Course\RoboVision\build_json\CMakeFiles\4.0.1\CMakeSystem.cmake;D:\Program Files\share\cmake-4.0\Modules\CMakeCInformation.cmake;D:\Program Files\share\cmake-4.0\Modules\CMakeCXXInformation.cmake;D:\Program Files\share\cmake-4.0\Modules\CMakeCommonLanguageInclude.cmake;D:\Program Files\share\cmake-4.0\Modules\CMakeDependentOption.cmake;D:\Program Files\share\cmake-4.0\Modules\CMakeGenericSystem.cmake;D:\Program Files\share\cmake-4.0\Modules\CMakeInitializeConfigs.cmake;D:\Program Files\share\cmake-4.0\Modules\CMakeLanguageInformation.cmake;D:\Program Files\share\cmake-4.0\Modules\CMakeRCInformation.cmake;D:\Program Files\share\cmake-4.0\Modules\CMakeSystemSpecificInformation.cmake;D:\Program Files\share\cmake-4.0\Modules\CMakeSystemSpecificInitialize.cmake;D:\Program Files\share\cmake-4.0\Modules\Compiler\CMakeCommonCompilerMacros.cmake;D:\Program Files\share\cmake-4.0\Modules\Compiler\MSVC-C.cmake;D:\Program Files\share\cmake-4.0\Modules\Compiler\MSVC-CXX.cmake;D:\Program Files\share\cmake-4.0\Modules\Compiler\MSVC.cmake;D:\Program Files\share\cmake-4.0\Modules\FindPackageHandleStandardArgs.cmake;D:\Program Files\share\cmake-4.0\Modules\FindPackageMessage.cmake;D:\Program Files\share\cmake-4.0\Modules\Internal\CMakeCLinkerInformation.cmake;D:\Program Files\share\cmake-4.0\Modules\Internal\CMakeCXXLinkerInformation.cmake;D:\Program Files\share\cmake-4.0\Modules\Internal\CMakeCommonLinkerInformation.cmake;D:\Program Files\share\cmake-4.0\Modules\Linker\MSVC-C.cmake;D:\Program Files\share\cmake-4.0\Modules\Linker\MSVC-CXX.cmake;D:\Program Files\share\cmake-4.0\Modules\Linker\MSVC.cmake;D:\Program Files\share\cmake-4.0\Modules\Platform\Linker\Windows-MSVC-C.cmake;D:\Program Files\share\cmake-4.0\Modules\Platform\Linker\Windows-MSVC-CXX.cmake;D:\Program Files\share\cmake-4.0\Modules\Platform\Linker\Windows-MSVC.cmake;D:\Program Files\share\cmake-4.0\Modules\Platform\Windows-Initialize.cmake;D:\Program Files\share\cmake-4.0\Modules\Platform\Windows-MSVC-C.cmake;D:\Program Files\share\cmake-4.0\Modules\Platform\Windows-MSVC-CXX.cmake;D:\Program Files\share\cmake-4.0\Modules\Platform\Windows-MSVC.cmake;D:\Program Files\share\cmake-4.0\Modules\Platform\Windows.cmake;D:\Program Files\share\cmake-4.0\Modules\Platform\WindowsPaths.cmake;D:\tools\opencv\build\OpenCVConfig-version.cmake;D:\tools\opencv\build\OpenCVConfig.cmake;D:\tools\opencv\build\x64\vc16\lib\OpenCVConfig.cmake;D:\tools\opencv\build\x64\vc16\lib\OpenCVModules-debug.cmake;D:\tools\opencv\build\x64\vc16\lib\OpenCVModules-release.cmake;D:\tools\opencv\build\x64\vc16\lib\OpenCVModules.cmake;D:\tools\vcpkg\installed\x64-windows\share\nlohmann_json\nlohmann_jsonConfig.cmake;D:\tools\vcpkg\installed\x64-windows\share\nlohmann_json\nlohmann_jsonConfigVersion.cmake;D:\tools\vcpkg\installed\x64-windows\share\nlohmann_json\nlohmann_jsonTargets.cmake;D:\tools\vcpkg\scripts\buildsystems\vcpkg.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:\Dokument\AI Course\RoboVision\build_json\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Building Custom Rule D:/Dokument/AI Course/RoboVision/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
+"D:\Program Files\bin\cmake.exe" "-SD:/Dokument/AI Course/RoboVision" "-BD:/Dokument/AI Course/RoboVision/build_json" --check-stamp-file "D:/Dokument/AI Course/RoboVision/build_json/CMakeFiles/generate.stamp"
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:\Dokument\AI Course\RoboVision\build_json\CMakeFiles\4.0.1\CMakeCCompiler.cmake;D:\Dokument\AI Course\RoboVision\build_json\CMakeFiles\4.0.1\CMakeCXXCompiler.cmake;D:\Dokument\AI Course\RoboVision\build_json\CMakeFiles\4.0.1\CMakeRCCompiler.cmake;D:\Dokument\AI Course\RoboVision\build_json\CMakeFiles\4.0.1\CMakeSystem.cmake;D:\Program Files\share\cmake-4.0\Modules\CMakeCInformation.cmake;D:\Program Files\share\cmake-4.0\Modules\CMakeCXXInformation.cmake;D:\Program Files\share\cmake-4.0\Modules\CMakeCommonLanguageInclude.cmake;D:\Program Files\share\cmake-4.0\Modules\CMakeDependentOption.cmake;D:\Program Files\share\cmake-4.0\Modules\CMakeGenericSystem.cmake;D:\Program Files\share\cmake-4.0\Modules\CMakeInitializeConfigs.cmake;D:\Program Files\share\cmake-4.0\Modules\CMakeLanguageInformation.cmake;D:\Program Files\share\cmake-4.0\Modules\CMakeRCInformation.cmake;D:\Program Files\share\cmake-4.0\Modules\CMakeSystemSpecificInformation.cmake;D:\Program Files\share\cmake-4.0\Modules\CMakeSystemSpecificInitialize.cmake;D:\Program Files\share\cmake-4.0\Modules\Compiler\CMakeCommonCompilerMacros.cmake;D:\Program Files\share\cmake-4.0\Modules\Compiler\MSVC-C.cmake;D:\Program Files\share\cmake-4.0\Modules\Compiler\MSVC-CXX.cmake;D:\Program Files\share\cmake-4.0\Modules\Compiler\MSVC.cmake;D:\Program Files\share\cmake-4.0\Modules\FindPackageHandleStandardArgs.cmake;D:\Program Files\share\cmake-4.0\Modules\FindPackageMessage.cmake;D:\Program Files\share\cmake-4.0\Modules\Internal\CMakeCLinkerInformation.cmake;D:\Program Files\share\cmake-4.0\Modules\Internal\CMakeCXXLinkerInformation.cmake;D:\Program Files\share\cmake-4.0\Modules\Internal\CMakeCommonLinkerInformation.cmake;D:\Program Files\share\cmake-4.0\Modules\Linker\MSVC-C.cmake;D:\Program Files\share\cmake-4.0\Modules\Linker\MSVC-CXX.cmake;D:\Program Files\share\cmake-4.0\Modules\Linker\MSVC.cmake;D:\Program Files\share\cmake-4.0\Modules\Platform\Linker\Windows-MSVC-C.cmake;D:\Program Files\share\cmake-4.0\Modules\Platform\Linker\Windows-MSVC-CXX.cmake;D:\Program Files\share\cmake-4.0\Modules\Platform\Linker\Windows-MSVC.cmake;D:\Program Files\share\cmake-4.0\Modules\Platform\Windows-Initialize.cmake;D:\Program Files\share\cmake-4.0\Modules\Platform\Windows-MSVC-C.cmake;D:\Program Files\share\cmake-4.0\Modules\Platform\Windows-MSVC-CXX.cmake;D:\Program Files\share\cmake-4.0\Modules\Platform\Windows-MSVC.cmake;D:\Program Files\share\cmake-4.0\Modules\Platform\Windows.cmake;D:\Program Files\share\cmake-4.0\Modules\Platform\WindowsPaths.cmake;D:\tools\opencv\build\OpenCVConfig-version.cmake;D:\tools\opencv\build\OpenCVConfig.cmake;D:\tools\opencv\build\x64\vc16\lib\OpenCVConfig.cmake;D:\tools\opencv\build\x64\vc16\lib\OpenCVModules-debug.cmake;D:\tools\opencv\build\x64\vc16\lib\OpenCVModules-release.cmake;D:\tools\opencv\build\x64\vc16\lib\OpenCVModules.cmake;D:\tools\vcpkg\installed\x64-windows\share\nlohmann_json\nlohmann_jsonConfig.cmake;D:\tools\vcpkg\installed\x64-windows\share\nlohmann_json\nlohmann_jsonConfigVersion.cmake;D:\tools\vcpkg\installed\x64-windows\share\nlohmann_json\nlohmann_jsonTargets.cmake;D:\tools\vcpkg\scripts\buildsystems\vcpkg.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:\Dokument\AI Course\RoboVision\build_json\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">Building Custom Rule D:/Dokument/AI Course/RoboVision/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">setlocal
+"D:\Program Files\bin\cmake.exe" "-SD:/Dokument/AI Course/RoboVision" "-BD:/Dokument/AI Course/RoboVision/build_json" --check-stamp-file "D:/Dokument/AI Course/RoboVision/build_json/CMakeFiles/generate.stamp"
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">D:\Dokument\AI Course\RoboVision\build_json\CMakeFiles\4.0.1\CMakeCCompiler.cmake;D:\Dokument\AI Course\RoboVision\build_json\CMakeFiles\4.0.1\CMakeCXXCompiler.cmake;D:\Dokument\AI Course\RoboVision\build_json\CMakeFiles\4.0.1\CMakeRCCompiler.cmake;D:\Dokument\AI Course\RoboVision\build_json\CMakeFiles\4.0.1\CMakeSystem.cmake;D:\Program Files\share\cmake-4.0\Modules\CMakeCInformation.cmake;D:\Program Files\share\cmake-4.0\Modules\CMakeCXXInformation.cmake;D:\Program Files\share\cmake-4.0\Modules\CMakeCommonLanguageInclude.cmake;D:\Program Files\share\cmake-4.0\Modules\CMakeDependentOption.cmake;D:\Program Files\share\cmake-4.0\Modules\CMakeGenericSystem.cmake;D:\Program Files\share\cmake-4.0\Modules\CMakeInitializeConfigs.cmake;D:\Program Files\share\cmake-4.0\Modules\CMakeLanguageInformation.cmake;D:\Program Files\share\cmake-4.0\Modules\CMakeRCInformation.cmake;D:\Program Files\share\cmake-4.0\Modules\CMakeSystemSpecificInformation.cmake;D:\Program Files\share\cmake-4.0\Modules\CMakeSystemSpecificInitialize.cmake;D:\Program Files\share\cmake-4.0\Modules\Compiler\CMakeCommonCompilerMacros.cmake;D:\Program Files\share\cmake-4.0\Modules\Compiler\MSVC-C.cmake;D:\Program Files\share\cmake-4.0\Modules\Compiler\MSVC-CXX.cmake;D:\Program Files\share\cmake-4.0\Modules\Compiler\MSVC.cmake;D:\Program Files\share\cmake-4.0\Modules\FindPackageHandleStandardArgs.cmake;D:\Program Files\share\cmake-4.0\Modules\FindPackageMessage.cmake;D:\Program Files\share\cmake-4.0\Modules\Internal\CMakeCLinkerInformation.cmake;D:\Program Files\share\cmake-4.0\Modules\Internal\CMakeCXXLinkerInformation.cmake;D:\Program Files\share\cmake-4.0\Modules\Internal\CMakeCommonLinkerInformation.cmake;D:\Program Files\share\cmake-4.0\Modules\Linker\MSVC-C.cmake;D:\Program Files\share\cmake-4.0\Modules\Linker\MSVC-CXX.cmake;D:\Program Files\share\cmake-4.0\Modules\Linker\MSVC.cmake;D:\Program Files\share\cmake-4.0\Modules\Platform\Linker\Windows-MSVC-C.cmake;D:\Program Files\share\cmake-4.0\Modules\Platform\Linker\Windows-MSVC-CXX.cmake;D:\Program Files\share\cmake-4.0\Modules\Platform\Linker\Windows-MSVC.cmake;D:\Program Files\share\cmake-4.0\Modules\Platform\Windows-Initialize.cmake;D:\Program Files\share\cmake-4.0\Modules\Platform\Windows-MSVC-C.cmake;D:\Program Files\share\cmake-4.0\Modules\Platform\Windows-MSVC-CXX.cmake;D:\Program Files\share\cmake-4.0\Modules\Platform\Windows-MSVC.cmake;D:\Program Files\share\cmake-4.0\Modules\Platform\Windows.cmake;D:\Program Files\share\cmake-4.0\Modules\Platform\WindowsPaths.cmake;D:\tools\opencv\build\OpenCVConfig-version.cmake;D:\tools\opencv\build\OpenCVConfig.cmake;D:\tools\opencv\build\x64\vc16\lib\OpenCVConfig.cmake;D:\tools\opencv\build\x64\vc16\lib\OpenCVModules-debug.cmake;D:\tools\opencv\build\x64\vc16\lib\OpenCVModules-release.cmake;D:\tools\opencv\build\x64\vc16\lib\OpenCVModules.cmake;D:\tools\vcpkg\installed\x64-windows\share\nlohmann_json\nlohmann_jsonConfig.cmake;D:\tools\vcpkg\installed\x64-windows\share\nlohmann_json\nlohmann_jsonConfigVersion.cmake;D:\tools\vcpkg\installed\x64-windows\share\nlohmann_json\nlohmann_jsonTargets.cmake;D:\tools\vcpkg\scripts\buildsystems\vcpkg.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">D:\Dokument\AI Course\RoboVision\build_json\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">Building Custom Rule D:/Dokument/AI Course/RoboVision/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">setlocal
+"D:\Program Files\bin\cmake.exe" "-SD:/Dokument/AI Course/RoboVision" "-BD:/Dokument/AI Course/RoboVision/build_json" --check-stamp-file "D:/Dokument/AI Course/RoboVision/build_json/CMakeFiles/generate.stamp"
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">D:\Dokument\AI Course\RoboVision\build_json\CMakeFiles\4.0.1\CMakeCCompiler.cmake;D:\Dokument\AI Course\RoboVision\build_json\CMakeFiles\4.0.1\CMakeCXXCompiler.cmake;D:\Dokument\AI Course\RoboVision\build_json\CMakeFiles\4.0.1\CMakeRCCompiler.cmake;D:\Dokument\AI Course\RoboVision\build_json\CMakeFiles\4.0.1\CMakeSystem.cmake;D:\Program Files\share\cmake-4.0\Modules\CMakeCInformation.cmake;D:\Program Files\share\cmake-4.0\Modules\CMakeCXXInformation.cmake;D:\Program Files\share\cmake-4.0\Modules\CMakeCommonLanguageInclude.cmake;D:\Program Files\share\cmake-4.0\Modules\CMakeDependentOption.cmake;D:\Program Files\share\cmake-4.0\Modules\CMakeGenericSystem.cmake;D:\Program Files\share\cmake-4.0\Modules\CMakeInitializeConfigs.cmake;D:\Program Files\share\cmake-4.0\Modules\CMakeLanguageInformation.cmake;D:\Program Files\share\cmake-4.0\Modules\CMakeRCInformation.cmake;D:\Program Files\share\cmake-4.0\Modules\CMakeSystemSpecificInformation.cmake;D:\Program Files\share\cmake-4.0\Modules\CMakeSystemSpecificInitialize.cmake;D:\Program Files\share\cmake-4.0\Modules\Compiler\CMakeCommonCompilerMacros.cmake;D:\Program Files\share\cmake-4.0\Modules\Compiler\MSVC-C.cmake;D:\Program Files\share\cmake-4.0\Modules\Compiler\MSVC-CXX.cmake;D:\Program Files\share\cmake-4.0\Modules\Compiler\MSVC.cmake;D:\Program Files\share\cmake-4.0\Modules\FindPackageHandleStandardArgs.cmake;D:\Program Files\share\cmake-4.0\Modules\FindPackageMessage.cmake;D:\Program Files\share\cmake-4.0\Modules\Internal\CMakeCLinkerInformation.cmake;D:\Program Files\share\cmake-4.0\Modules\Internal\CMakeCXXLinkerInformation.cmake;D:\Program Files\share\cmake-4.0\Modules\Internal\CMakeCommonLinkerInformation.cmake;D:\Program Files\share\cmake-4.0\Modules\Linker\MSVC-C.cmake;D:\Program Files\share\cmake-4.0\Modules\Linker\MSVC-CXX.cmake;D:\Program Files\share\cmake-4.0\Modules\Linker\MSVC.cmake;D:\Program Files\share\cmake-4.0\Modules\Platform\Linker\Windows-MSVC-C.cmake;D:\Program Files\share\cmake-4.0\Modules\Platform\Linker\Windows-MSVC-CXX.cmake;D:\Program Files\share\cmake-4.0\Modules\Platform\Linker\Windows-MSVC.cmake;D:\Program Files\share\cmake-4.0\Modules\Platform\Windows-Initialize.cmake;D:\Program Files\share\cmake-4.0\Modules\Platform\Windows-MSVC-C.cmake;D:\Program Files\share\cmake-4.0\Modules\Platform\Windows-MSVC-CXX.cmake;D:\Program Files\share\cmake-4.0\Modules\Platform\Windows-MSVC.cmake;D:\Program Files\share\cmake-4.0\Modules\Platform\Windows.cmake;D:\Program Files\share\cmake-4.0\Modules\Platform\WindowsPaths.cmake;D:\tools\opencv\build\OpenCVConfig-version.cmake;D:\tools\opencv\build\OpenCVConfig.cmake;D:\tools\opencv\build\x64\vc16\lib\OpenCVConfig.cmake;D:\tools\opencv\build\x64\vc16\lib\OpenCVModules-debug.cmake;D:\tools\opencv\build\x64\vc16\lib\OpenCVModules-release.cmake;D:\tools\opencv\build\x64\vc16\lib\OpenCVModules.cmake;D:\tools\vcpkg\installed\x64-windows\share\nlohmann_json\nlohmann_jsonConfig.cmake;D:\tools\vcpkg\installed\x64-windows\share\nlohmann_json\nlohmann_jsonConfigVersion.cmake;D:\tools\vcpkg\installed\x64-windows\share\nlohmann_json\nlohmann_jsonTargets.cmake;D:\tools\vcpkg\scripts\buildsystems\vcpkg.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">D:\Dokument\AI Course\RoboVision\build_json\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">false</LinkObjects>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="D:\Dokument\AI Course\RoboVision\ColourIdentify.cpp" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="D:\Dokument\AI Course\RoboVision\build_json\ZERO_CHECK.vcxproj">
+      <Project>{92EFDF29-8DB9-37CC-A7DA-FD3ED81840ED}</Project>
+      <Name>ZERO_CHECK</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

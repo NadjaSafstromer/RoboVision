@@ -1,0 +1,10 @@
+^D:\DOKUMENT\AI COURSE\ROBOVISION\BUILD_JSON\CMAKEFILES\1674E35B227FCA6C0CB488DE44860703\GENERATE.STAMP.RULE
+setlocal
+"D:\Program Files\bin\cmake.exe" "-SD:/Dokument/AI Course/RoboVision" "-BD:/Dokument/AI Course/RoboVision/build_json" --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file "D:/Dokument/AI Course/RoboVision/build_json/RoboVision.sln"
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd

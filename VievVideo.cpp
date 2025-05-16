@@ -4,11 +4,17 @@
 #include <iostream>
 #include <fstream>
 #include "players.h"
+#include <zmq.hpp>
+#include <string>
+#include <nlohmann/json.hpp> 
 
 int previous[4] = { 0 };
 int nextId = 1;
 using namespace std; //helps to use short comands. 
 using namespace cv;
+using namespace zmq;
+using json = nlohmann::json;
+
 
 int yellowAmount[4] = {0};
 bool check = false;
@@ -22,10 +28,38 @@ Scalar yellowmin = Scalar(20, 100, 100);
 Scalar yellowmax = Scalar(35, 255, 255);
 
 vector <Point> blueCenter;
+vector <Point> yellowCenter;
 vector <Point> purpleCenter;
 vector <Point> ballCenter;
 vector <Player> players;
-vector <Point> yellowCenter;
+
+void sendData(const int numberOfPlayers) {
+    context_t ctx;
+    socket_t sock(ctx, socket_type::req);
+    sock.connect("tcp://127.0.0.1:5555");
+
+    json all_data = json::array();  // JSON-array
+
+    for (size_t i = 0; i < blueCenter.size() && i < 4; ++i) {
+        float x = -0.5f + blueCenter[i].x / 1000.0f;
+        float y =  0.8f - blueCenter[i].y / 1000.0f;
+
+        json data;
+        data["id"] = yellowAmount[i];
+        data["x"] = x;
+        data["y"] = y;
+
+        all_data.push_back(data);  // lägg till varje robot i arrayen
+    }
+
+    std::string payload = all_data.dump();
+    sock.send(zmq::buffer(payload), zmq::send_flags::none);
+
+    zmq::message_t reply;
+    sock.recv(reply);
+    std::string reply_str(static_cast<char*>(reply.data()), reply.size());
+    std::cout << "Server replied: " << reply_str << std::endl;
+}
 
 void locatePlayer(Mat img, Scalar low, Scalar high, Color color) {
     Mat mask;
@@ -67,6 +101,14 @@ void locatePlayer(Mat img, Scalar low, Scalar high, Color color) {
                 yellowCenter.push_back(currentPlayerYellowCenter);
             }
             
+            if (color == Color::Orange) 
+            {
+                ballCenter.clear();
+                int bdx = boundRect.x + boundRect.width / 2;
+                int bdy = boundRect.y + boundRect.height / 2;
+                Point currentBallCenter(bdx, bdy);
+                ballCenter.push_back(currentBallCenter);
+            }
             players.emplace_back(color, boundRect, boundRect.x + boundRect.width / 2, boundRect.y + boundRect.height / 2);
     }
 }
@@ -161,7 +203,7 @@ int main() {
     clearOur.close();
 
     // Load the video file
-    VideoCapture cap("D:\\Dokument\\AI Course\\Material\\robots.mp4");
+    VideoCapture cap("D:\\Dokument\\AI Course\\Material\\go\\go\\cam0\\3.mp4");
 
     if (!cap.isOpened()) {
         cout << "Error opening video stream" << endl;
@@ -197,12 +239,12 @@ int main() {
         cvtColor(frame, hsv, COLOR_BGR2HSV);
 
         locatePlayer(hsv, bluemin, bluemax, Color::Blue);
-        locatePlayer(hsv, purplemin, purplemax, Color::Purple);
         locatePlayer(hsv, yellowmin, yellowmax, Color::Yellow);
+        locatePlayer(hsv, orangemin, orangemax, Color::Orange);
 
         playerId(hsv); // ID assignment and saving to CSV
         drawPlayer(copy);
-
+        sendData(4);
         video.write(copy);
         imshow("Check", copy);
 
@@ -222,3 +264,4 @@ int main() {
     destroyAllWindows();
     return 0;
 }
+

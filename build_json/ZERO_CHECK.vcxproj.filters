@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="D:\Dokument\AI Course\RoboVision\build_json\CMakeFiles\1674e35b227fca6c0cb488de44860703\generate.stamp.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{416798FF-747B-3CAE-8931-411494D65F9D}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

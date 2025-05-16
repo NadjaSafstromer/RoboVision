@@ -29,18 +29,28 @@ context = zmq.Context()
 socket = context.socket(zmq.REP)
 socket.bind("tcp://*:5555")  # server listens on port 5555
 
-print("Server is running...")
+print("Server is running... Press Ctrl+C to stop.")
 
-while True:
-    # Receive input
-    message = socket.recv_json()
-    robot_id, x, y = message["id"], message["x"], message["y"]
+try:
+    while True:
+        message = socket.recv_json()
+        
+        results = []
+        for entry in message:  # loopar över varje robot
+            robot_id, x, y = entry["id"], entry["x"], entry["y"]
+            input_tensor = torch.tensor([[robot_id, x, y]], dtype=torch.float32)
+            with torch.no_grad():
+                prediction = model(input_tensor).squeeze().tolist()
+            results.append({
+                "id": robot_id,
+                "next_x": prediction[0],
+                "next_y": prediction[1]
+            })
 
-    # Predict next position
-    input_tensor = torch.tensor([[robot_id, x, y]], dtype=torch.float32)
-    with torch.no_grad():
-        prediction = model(input_tensor).squeeze().tolist()
+        socket.send_json(results)
 
-    # Send back prediction
-    response = {"next_x": prediction[0], "next_y": prediction[1]}
-    socket.send_json(response)
+except KeyboardInterrupt:
+    print("\n[INFO] Server manually stopped.")
+finally:
+    socket.close()
+    context.term()

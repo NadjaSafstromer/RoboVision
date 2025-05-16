@@ -1,0 +1,10 @@
+^D:\DOKUMENT\AI COURSE\ROBOVISION\CMAKELISTS.TXT
+setlocal
+"D:\Program Files\bin\cmake.exe" "-SD:/Dokument/AI Course/RoboVision" "-BD:/Dokument/AI Course/RoboVision/build" --check-stamp-file "D:/Dokument/AI Course/RoboVision/build/CMakeFiles/generate.stamp"
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd

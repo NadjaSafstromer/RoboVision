@@ -179,6 +179,8 @@ CMAKE_STATIC_LINKER_FLAGS_RELEASE:STRING=
 // during RELWITHDEBINFO builds.
 CMAKE_STATIC_LINKER_FLAGS_RELWITHDEBINFO:STRING=
 
+CMAKE_TOOLCHAIN_FILE:STRING=D:/tools/vcpkg/scripts/buildsystems/vcpkg.cmake
+
 //If this value is on, makefiles will be generated without the
 // .SILENT directive, and all commands will be echoed to the console
 // during the make.  This is useful for debugging only. With Visual
@@ -193,6 +195,9 @@ RoboVision_IS_TOP_LEVEL:STATIC=ON
 
 //Value Computed by CMake
 RoboVision_SOURCE_DIR:STATIC=D:/Dokument/AI Course/RoboVision
+
+//The directory containing a CMake configuration file for nlohmann_json.
+nlohmann_json_DIR:PATH=nlohmann_json_DIR-NOTFOUND
 
 
 ########################
