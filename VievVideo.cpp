@@ -16,7 +16,7 @@ using namespace zmq;
 using json = nlohmann::json;
 
 
-int yellowAmount[4] = {0};
+int purpleAmount[4] = {0};
 bool check = false;
 Scalar bluemin = Scalar(112, 103, 50);
 Scalar bluemax = Scalar(125, 255, 255);
@@ -33,10 +33,11 @@ vector <Point> purpleCenter;
 vector <Point> ballCenter;
 vector <Player> players;
 
+
 void sendData(const int numberOfPlayers) {
     context_t ctx;
     socket_t sock(ctx, socket_type::req);
-    sock.connect("tcp://127.0.0.1:5555");
+    sock.connect("tcp://10.132.186.190:5555");
 
     json all_data = json::array();
 
@@ -49,7 +50,13 @@ void sendData(const int numberOfPlayers) {
         float norm_x = -0.5f + blueCenter[i].x / 1000.0f;
         float norm_y =  0.8f - blueCenter[i].y / 1000.0f;
 
-        std::string robot_id = "agent_blue_" + std::to_string(yellowAmount[i]);
+        int model_id = purpleAmount[i]; // detta måste motsvara träningen
+
+        std::string robot_id = "agent_blue_" + std::to_string(model_id);
+
+        std::cout << "[SEND] ID: " << robot_id
+                  << " (" << model_id << ")"
+                  << " | Normalized Pos: (" << norm_x << ", " << norm_y << ")\n";
 
         // Validera prediktion
         if (lastPrediction.count(robot_id)) {
@@ -69,14 +76,15 @@ void sendData(const int numberOfPlayers) {
 
             float accuracy = 100.0f * correctPredictions / totalPredictions;
             std::cout << "Current accuracy: " << accuracy << "%\n";
+        } else {
+            std::cout << "[NO VALIDATION] No previous prediction for " << robot_id << std::endl;
         }
 
-        // Lägg till i JSON
+        // Skicka till server
         json data;
-        data["id"] = yellowAmount[i];
+        data["id"] = model_id;
         data["x"] = norm_x;
         data["y"] = norm_y;
-
         all_data.push_back(data);
     }
 
@@ -86,9 +94,9 @@ void sendData(const int numberOfPlayers) {
     zmq::message_t reply;
     sock.recv(reply);
     std::string reply_str(static_cast<char*>(reply.data()), reply.size());
-    std::cout << "Server replied: " << reply_str << std::endl;
+    std::cout << "[REPLY] Server replied: " << reply_str << std::endl;
 
-    // Försök tolka svaret och uppdatera prediktioner
+    // Uppdatera prediktioner
     try {
         json prediction_array = json::parse(reply_str);
         for (const auto& pred : prediction_array) {
@@ -96,16 +104,20 @@ void sendData(const int numberOfPlayers) {
             float pred_x = pred["next_x"].get<float>();
             float pred_y = pred["next_y"].get<float>();
             lastPrediction[id] = Point2f(pred_x, pred_y);
+
+            std::cout << "[UPDATE] Saved prediction for " << id
+                      << " => (" << pred_x << ", " << pred_y << ")\n";
         }
     } catch (const std::exception& e) {
-        std::cerr << "Failed to parse prediction reply: " << e.what() << std::endl;
+        std::cerr << "[ERROR] Failed to parse prediction reply: " << e.what() << std::endl;
     }
 }
 
 
+
 void locatePlayer(Mat img, Scalar low, Scalar high, Color color) {
     Mat mask;
-    //Mat purpleMask, orangeMask;
+    Mat purpleMask, orangeMask;
 
     inRange(img, low, high, mask);
     vector < vector < Point>> contours;// Stores all detected contours, each as a list of points
@@ -173,23 +185,24 @@ void playerId(Mat img)
     {
         // Tilldela ID till blå spelare baserat på avstånd till gula markörer
         for (size_t i = 0; i < blueCenter.size() && i < 4; ++i) {
-            for (size_t j = 0; j < yellowCenter.size(); ++j) {
-                double dist = norm(blueCenter[i] - yellowCenter[j]);
-                if (dist < 25 && yellowAmount[i] == 0) {
-                    yellowAmount[i] = nextId;
+            for (size_t j = 0; j < purpleCenter.size(); ++j) {
+                double dist = norm(blueCenter[i] - purpleCenter[j]);
+                if (dist < 25 && purpleAmount[i] == 0) {
+                    purpleAmount[i] = nextId;
                     nextId++;
-                    cout << "Blue ID: " << yellowAmount[i] << ", " << blueCenter[i] << endl;
+                    cout << "Blue ID: " << purpleAmount[i]
+                         << " => norm_x: " << -0.5 + blueCenter[i].x / 1000.0 << endl;
                     break;
                 }
             }
         }
 
-        // Tilldela ID direkt till gula spelare (utan avståndscheck)
-        for (size_t i = 0; i < yellowCenter.size(); ++i) {
-            if (yellowAmount[i] == 0) {
-                yellowAmount[i] = nextId;
+        // Tilldela ID till gula spelare (utan avståndscheck)
+        for (size_t i = 0; i < purpleCenter.size(); ++i) {
+            if (purpleAmount[i] == 0) {
+                purpleAmount[i] = nextId;
                 nextId++;
-                cout << "Yellow ID: " << yellowAmount[i] << ", " << yellowCenter[i] << endl;
+                cout << "Yellow ID: " << purpleAmount[i] << ", " << purpleCenter[i] << endl;
             }
         }
 
@@ -200,16 +213,24 @@ void playerId(Mat img)
     {
         Positions << "Ball: " << ballCenter << endl;
         for (size_t i = 0; i < blueCenter.size() && i < 4; ++i) {
-            Positions << "Blue Id: " << yellowAmount[i] << ", " << blueCenter[i] << endl;
+            float x = blueCenter[i].x;
+            float y = blueCenter[i].y;
+
+            float norm_x = -0.5f + x / 1000.0f;
+            float norm_y =  0.8f - y / 1000.0f;
+
+            Positions << "agent_blue_" << purpleAmount[i] << " "
+                      << norm_x << " " << norm_y << endl;
         }
         Positions.close();
 
-        for (size_t i = 0; i < yellowCenter.size(); ++i) {
-            OurPositions << "Yellow Id: " << yellowAmount[i] << ", " << yellowCenter[i] << endl;
+        for (size_t i = 0; i < purpleCenter.size(); ++i) {
+            OurPositions << "Yellow Id: " << purpleAmount[i] << ", " << purpleCenter[i] << endl;
         }
         OurPositions.close();
     }
 }
+
 
 
 
@@ -245,7 +266,7 @@ int main() {
     clearOur.close();
 
     // Load the video file
-    VideoCapture cap("D:\\Dokument\\AI Course\\Material\\go\\go\\cam0\\3.mp4");
+    VideoCapture cap("D:\\Dokument\\AI Course\\Material\\vid\\vid\\2.avi");
 
     if (!cap.isOpened()) {
         cout << "Error opening video stream" << endl;
@@ -281,7 +302,7 @@ int main() {
         cvtColor(frame, hsv, COLOR_BGR2HSV);
 
         locatePlayer(hsv, bluemin, bluemax, Color::Blue);
-        locatePlayer(hsv, yellowmin, yellowmax, Color::Yellow);
+        locatePlayer(hsv, purplemin, purplemax, Color::Yellow);
         locatePlayer(hsv, orangemin, orangemax, Color::Orange);
 
         playerId(hsv); // ID assignment and saving to CSV
@@ -306,4 +327,3 @@ int main() {
     destroyAllWindows();
     return 0;
 }
-

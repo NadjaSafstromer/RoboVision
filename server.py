@@ -27,7 +27,7 @@ model.eval()
 # Set up ZeroMQ server
 context = zmq.Context()
 socket = context.socket(zmq.REP)
-socket.bind("tcp://*:5555")  # server listens on port 5555
+socket.bind("tcp://10.132.186.190:5555")  # server listens on port 5555
 
 print("Server is running... Press Ctrl+C to stop.")
 
