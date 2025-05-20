@@ -32,17 +32,18 @@ response. Uses the response to compare predicted value to true value and calcula
 void sendData(const int numberOfPlayers) {
     context_t ctx;
     socket_t sock(ctx, socket_type::req);
-    sock.connect("tcp://10.132.174.117:5555");
+    sock.connect("tcp://10.132.175.34:5555");
 
     static map<string, Point2f> lastPrediction;
     static int totalPredictions = 0;
     static int correctPredictions = 0;
     const float threshold = 0.05f;
 
-    for (size_t i = 0; i < blueCenter.size() && i < 4; ++i) {
+    for (size_t i = 0; i < blueCenter.size(); ++i) {
         float norm_x = -0.5f + blueCenter[i].x / 1000.0f;
         float norm_y = 0.8f - blueCenter[i].y / 1000.0f;
-
+        int model_id = purpleAmount[i]; // detta måste motsvara träninge
+        std::string robot_id = "agentblue" + std::to_string(model_id);
         // check for last prediction, if it exists
         if (lastPrediction.count(robot_id)) {
             Point2f predictedPos = lastPrediction[robot_id];
@@ -74,15 +75,16 @@ void sendData(const int numberOfPlayers) {
         zmq::message_t reply;
         sock.recv(reply, zmq::recv_flags::none);
         string replyStr(static_cast<char*>(reply.data()), reply.size());
-
+        cout << "Server response: " << replyStr << endl;
         float pred_x, pred_y;
-        if (sscanf(replyStr.c_str(), "{\"next_x\":%f,\"next_y\":%f}", &pred_x, &pred_y) == 2) {
-            lastPrediction[robot_id] = Point2f(pred_x, pred_y);  // save prediction to compare it w the next frame
+        const char* format = "{ \"next_x\" : %f , \"next_y\" : %f }";
+
+        if (sscanf_s(replyStr.c_str(), format, &pred_x, &pred_y) == 2) {
+            lastPrediction[robot_id] = Point2f(pred_x, pred_y);  // Save prediction for comparison in the next frame
         }
         else {
-            cerr << "failure :( "
+            cerr << "Failure: ( " << replyStr << endl;
         }
-        
     }    
 }
 void locatePlayer(Mat img, Scalar low, Scalar high, Color color) {
@@ -172,7 +174,7 @@ int main() {
     ofstream clearFile("C:\\Users\\jbnlu\\Desktop\\positions.txt");
     clearFile.close();
     //load the video file
-    VideoCapture cap("C:\\Users\\jbnlu\\Pictures\\run2_2.MP4");
+    VideoCapture cap("C:\\Users\\jbnlu\\Pictures\\run2_2.mp4");
 
     // Check if file opened
     if (!cap.isOpened()) {
@@ -209,10 +211,10 @@ int main() {
         blueCenter.clear();
         purpleCenter.clear();
         //writes vieo file to earlier specified location.
-        video.write(copy);
+        //video.write(copy);
         // display the resulting video
 
-        imshow("Check", copy);
+       // imshow("Check", copy);
         // Press  ESC on keyboard to  exit
         char c = (char)waitKey(1);
         if (c == 27)
