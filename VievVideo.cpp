@@ -16,7 +16,7 @@ using namespace zmq;
 using json = nlohmann::json;
 
 
-int purpleAmount[4] = {0};
+int yellowAmount[4] = {0};
 bool check = false;
 Scalar bluemin = Scalar(112, 103, 50);
 Scalar bluemax = Scalar(125, 255, 255);
@@ -37,7 +37,7 @@ vector <Player> players;
 void sendData(const int numberOfPlayers) {
     context_t ctx;
     socket_t sock(ctx, socket_type::req);
-    sock.connect("tcp://10.132.186.190:5555");
+    sock.connect("tcp://192.168.8.37:5555");
 
     json all_data = json::array();
 
@@ -50,7 +50,7 @@ void sendData(const int numberOfPlayers) {
         float norm_x = -0.5f + blueCenter[i].x / 1000.0f;
         float norm_y =  0.8f - blueCenter[i].y / 1000.0f;
 
-        int model_id = purpleAmount[i]; // detta måste motsvara träningen
+        int model_id = yellowAmount[i]; // detta måste motsvara träningen
 
         std::string robot_id = "agent_blue_" + std::to_string(model_id);
 
@@ -118,52 +118,47 @@ void sendData(const int numberOfPlayers) {
 void locatePlayer(Mat img, Scalar low, Scalar high, Color color) {
     Mat mask;
     Mat purpleMask, orangeMask;
-
     inRange(img, low, high, mask);
-    vector < vector < Point>> contours;// Stores all detected contours, each as a list of points
-    findContours(mask, contours, RETR_EXTERNAL, CHAIN_APPROX_SIMPLE); // Finds external contours in the mask image and stores them in 'contours'//findcountrus function from open cv can be call from using namespace cv;
+    vector < vector < Point>> contours;
+    findContours(mask, contours, RETR_EXTERNAL, CHAIN_APPROX_SIMPLE);
 
     // Position Tracking
-    for (size_t i = 0; i < contours.size();++i) // Loop through all contours using size_t to match the container's size type
-    
-    {
+
+    for (size_t i = 0; i < contours.size();++i) {
         Rect boundRect = boundingRect(contours[i]);
-            //store the blue color center for the enemy team
-            if (color == Color::Blue) 
-            {
-                int px = boundRect.x + boundRect.width / 2;
-                int py = boundRect.y + boundRect.height / 2;
-                Point currentPlayerCenter(px, py);
-                blueCenter.push_back(currentPlayerCenter);
-                
-            }
+        //store the blue color center for the enemy team
+        if (color == Color::Blue) {
+            int px = boundRect.x + boundRect.width / 2;
+            int py = boundRect.y + boundRect.height / 2;
+            Point currentPlayerCenter(px, py);
+            blueCenter.push_back(currentPlayerCenter);
 
-            //store the purple color identifier center for id creation
-            if (color == Color::Purple) {
-                int idx = boundRect.x + boundRect.width / 2;
-                int idy = boundRect.y + boundRect.height / 2;
-                Point currentPlayerIdCenter(idx, idy);
-                purpleCenter.push_back(currentPlayerIdCenter);
-              
-            }
 
-            if (color == Color::Yellow) //home team
-            {
-                int gx = boundRect.x + boundRect.width / 2;
-                int gy = boundRect.y + boundRect.height / 2;
-                Point currentPlayerYellowCenter(gx, gy);
-                yellowCenter.push_back(currentPlayerYellowCenter);
-            }
-            
-            if (color == Color::Orange) 
-            {
-                ballCenter.clear();
-                int bdx = boundRect.x + boundRect.width / 2;
-                int bdy = boundRect.y + boundRect.height / 2;
-                Point currentBallCenter(bdx, bdy);
-                ballCenter.push_back(currentBallCenter);
-            }
-            players.emplace_back(color, boundRect, boundRect.x + boundRect.width / 2, boundRect.y + boundRect.height / 2);
+        }
+        //store the purple color identifier center for id creation
+        if (color == Color::Purple) {
+            int idx = boundRect.x + boundRect.width / 2;
+            int idy = boundRect.y + boundRect.height / 2;
+            Point currentPlayerIdCenter(idx, idy);
+            purpleCenter.push_back(currentPlayerIdCenter);
+
+        }
+        if (color == Color::Yellow) {
+            int idx = boundRect.x + boundRect.width / 2;
+            int idy = boundRect.y + boundRect.height / 2;
+            Point currentPlayerIdCenter(idx, idy);
+            purpleCenter.push_back(currentPlayerIdCenter);
+
+        }
+        
+        if (color == Color::Orange) {
+            ballCenter.clear();
+            int bdx = boundRect.x + boundRect.width / 2;
+            int bdy = boundRect.y + boundRect.height / 2;
+            Point currentBallCenter(bdx, bdy);
+            ballCenter.push_back(currentBallCenter);
+        }
+        players.emplace_back(color, boundRect, boundRect.x + boundRect.width / 2, boundRect.y + boundRect.height / 2);
     }
 }
 
@@ -185,12 +180,12 @@ void playerId(Mat img)
     {
         // Tilldela ID till blå spelare baserat på avstånd till gula markörer
         for (size_t i = 0; i < blueCenter.size() && i < 4; ++i) {
-            for (size_t j = 0; j < purpleCenter.size(); ++j) {
-                double dist = norm(blueCenter[i] - purpleCenter[j]);
-                if (dist < 25 && purpleAmount[i] == 0) {
-                    purpleAmount[i] = nextId;
+            for (size_t j = 0; j < yellowCenter.size(); ++j) {
+                double dist = norm(blueCenter[i] - yellowCenter[j]);
+                if (dist < 25 && yellowAmount[i] == 0) {
+                    yellowAmount[i] = nextId;
                     nextId++;
-                    cout << "Blue ID: " << purpleAmount[i]
+                    cout << "Blue ID: " << yellowAmount[i]
                          << " => norm_x: " << -0.5 + blueCenter[i].x / 1000.0 << endl;
                     break;
                 }
@@ -198,11 +193,11 @@ void playerId(Mat img)
         }
 
         // Tilldela ID till gula spelare (utan avståndscheck)
-        for (size_t i = 0; i < purpleCenter.size(); ++i) {
-            if (purpleAmount[i] == 0) {
-                purpleAmount[i] = nextId;
+        for (size_t i = 0; i < yellowCenter.size(); ++i) {
+            if (yellowAmount[i] == 0) {
+                yellowAmount[i] = nextId;
                 nextId++;
-                cout << "Yellow ID: " << purpleAmount[i] << ", " << purpleCenter[i] << endl;
+                cout << "Yellow ID: " << yellowAmount[i] << ", " << yellowCenter[i] << endl;
             }
         }
 
@@ -219,13 +214,13 @@ void playerId(Mat img)
             float norm_x = -0.5f + x / 1000.0f;
             float norm_y =  0.8f - y / 1000.0f;
 
-            Positions << "agent_blue_" << purpleAmount[i] << " "
+            Positions << "agent_blue_" << yellowAmount[i] << " "
                       << norm_x << " " << norm_y << endl;
         }
         Positions.close();
 
-        for (size_t i = 0; i < purpleCenter.size(); ++i) {
-            OurPositions << "Yellow Id: " << purpleAmount[i] << ", " << purpleCenter[i] << endl;
+        for (size_t i = 0; i < yellowCenter.size(); ++i) {
+            OurPositions << "Yellow Id: " << yellowAmount[i] << ", " << yellowCenter[i] << endl;
         }
         OurPositions.close();
     }
@@ -236,7 +231,7 @@ void playerId(Mat img)
 
 //Drawing the bounding boxes for every player for visual clarifaction
 //Note that this will later be repurposed for trail creation
-int frameCounter = 0;
+//int frameCounter = 0;
 
 void drawPlayer(Mat img) {
     for (size_t i = 0; i < blueCenter.size(); ++i) {
@@ -258,72 +253,65 @@ void drawPlayer(Mat img) {
 
 
 int main() {
-    // Clear the output files once at the beginning
+    // Töm filerna i början
     ofstream clearFile("D:\\Dokument\\AI Course\\outputs\\positions.csv");
     clearFile.close();
 
-    ofstream clearOur("D:\\Dokument\\AI Course\\outputs\\ourPositions.csv");
-    clearOur.close();
+    /*ofstream clearOur("D:\\Dokument\\AI Course\\outputs\\ourPositions.csv");
+    clearOur.close();*/
 
-    // Load the video file
+    // Ladda videon
     VideoCapture cap("D:\\Dokument\\AI Course\\Material\\vid\\vid\\2.avi");
-
     if (!cap.isOpened()) {
         cout << "Error opening video stream" << endl;
         return -1;
     }
 
+    int frame_width = cap.get(CAP_PROP_FRAME_WIDTH);
+    int frame_height = cap.get(CAP_PROP_FRAME_HEIGHT);
 
-    Mat frame;
-    cap >> frame;
-    if (frame.empty()) {
-        cout << "Empty first frame." << endl;
-        return -1;
-    }
-
-
-    // Prepare video writer
-    int frame_width = frame.cols;
-    int frame_height = frame.rows;
     VideoWriter video("D:\\Dokument\\AI Course\\outputs\\Tracking_Bound.avi",
                       VideoWriter::fourcc('M', 'J', 'P', 'G'),
                       30, Size(frame_width, frame_height));
 
-    while (true) {
-        frameCounter++;
+     while (1) {
+        Mat frame;
+        Mat copy;
+        Mat mask;
+
         cap >> frame;
+        //if frame doesnt exist, stop the program (debug tool)
         if (frame.empty())
             break;
 
-        Mat copy;
+        // Lowers the framerate. Not needed but makes it easier to see.
         frame.copyTo(copy);
 
-        Mat hsv;
-        cvtColor(frame, hsv, COLOR_BGR2HSV);
-
-        locatePlayer(hsv, bluemin, bluemax, Color::Blue);
-        locatePlayer(hsv, purplemin, purplemax, Color::Yellow);
-        locatePlayer(hsv, orangemin, orangemax, Color::Orange);
-
-        playerId(hsv); // ID assignment and saving to CSV
+        cvtColor(frame, frame, COLOR_BGR2HSV);
+        locatePlayer(frame, bluemin, bluemax, Color::Blue);
+        locatePlayer(frame, purplemin, purplemax, Color::Yellow);
+        locatePlayer(frame, orangemin, orangemax, Color::Orange);
+        playerId(frame);
         drawPlayer(copy);
         sendData(4);
-        video.write(copy);
-        imshow("Check", copy);
-
-        // Clear positions for next frame (used only for drawing)
         blueCenter.clear();
-        purpleCenter.clear();
         yellowCenter.clear();
+        //writes vieo file to earlier specified location.
+        video.write(copy);
+        // display the resulting video
 
-        // Exit loop if ESC is pressed
+        imshow("Check", copy);
+        // Press  ESC on keyboard to  exit
         char c = (char)waitKey(1);
         if (c == 27)
             break;
     }
 
+    //wWhen everything done, release the video capture and write object
     cap.release();
     video.release();
+
+    // closes all the frames
     destroyAllWindows();
     return 0;
 }
